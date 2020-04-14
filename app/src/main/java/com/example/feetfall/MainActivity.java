@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btContinue)
     public void btContinue(View v) {
         Intent i = new Intent(MainActivity.this, GameActivity.class);
-        i.putExtra("new", false);
         startActivity(i);
     }
 
