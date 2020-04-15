@@ -1,12 +1,9 @@
 package com.example.feetfall;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.example.feetfall.fragments.EquipmentFragment;
 import com.example.feetfall.fragments.InventoryFragment;
 import com.example.feetfall.fragments.StatsFragment;
