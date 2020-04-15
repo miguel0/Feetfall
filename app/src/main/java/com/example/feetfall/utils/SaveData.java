@@ -1,4 +1,4 @@
-package com.example.feetfall;
+package com.example.feetfall.utils;
 
 public class SaveData {
     // Stats

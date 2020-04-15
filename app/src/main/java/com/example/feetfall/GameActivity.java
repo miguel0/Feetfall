@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.example.feetfall.utils.SaveData;
 
 public class GameActivity extends AppCompatActivity {
 

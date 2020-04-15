@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.feetfall.GameActivity;
 import com.example.feetfall.R;
-import com.example.feetfall.SaveData;
+import com.example.feetfall.utils.SaveData;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

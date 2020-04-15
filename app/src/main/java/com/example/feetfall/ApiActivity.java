@@ -39,7 +39,6 @@ public class ApiActivity extends AppCompatActivity {
                 try {
                     JSONObject data = response.getJSONObject("data");
                     gif = data.getString("image_original_url");
-                    Toast.makeText(ApiActivity.this, gif, Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
