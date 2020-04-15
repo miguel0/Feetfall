@@ -26,7 +26,7 @@ public class SaveData {
 
     public static void damage(int n) {
         hp -= n;
-        if(n < 0) {
+        if(hp < 0) {
             hp = 0;
         }
     }
