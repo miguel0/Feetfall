@@ -23,8 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Button"
-        app:layout_constraintEnd_toStartOf="@+id/btDec2"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDecFirst" />
 
@@ -35,9 +34,8 @@
         android:layout_marginTop="16dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btDec1"
-        app:layout_constraintTop_toBottomOf="@+id/tvDecFirst" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btDec1" />
 
     <TextView
         android:id="@+id/tvDecSec"
@@ -48,6 +46,7 @@
         android:layout_marginEnd="16dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btDec1" />
+        app:layout_constraintTop_toBottomOf="@+id/btDec2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

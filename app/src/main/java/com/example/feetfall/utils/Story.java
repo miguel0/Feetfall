@@ -39,7 +39,7 @@ public class Story {
     private Decision d2 = new Decision(text2, new DecisionButton(bt21, result21, 2, 0, 0, 9, d3_1, null),
             new DecisionButton(bt22, result22, 0, 0, 0, 0, d3_2, null));
 
-    private Decision d1 = new Decision(text1, new DecisionButton(bt11, result11, 3, 49, 0, 0, d2, null),
+    private Decision d1 = new Decision(text1, new DecisionButton(bt11, result11, 6, 49, 0, 0, d2, null),
             new DecisionButton(bt12, result12, 0, 1000, 0, 0, null, null));
 
     public Story() {
