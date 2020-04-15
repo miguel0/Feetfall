@@ -49,6 +49,7 @@ public class GameActivity extends AppCompatActivity {
             SaveData.hp = 50;
             SaveData.str = 10;
             SaveData.def = 8;
+            SaveData.statp = 0;
             SaveData.index = 0;
         } else {
             SaveData.lvl = pref.getInt("lvl", 1);
@@ -58,6 +59,7 @@ public class GameActivity extends AppCompatActivity {
             SaveData.hp = pref.getInt("hp", 50);
             SaveData.str = pref.getInt("str", 10);
             SaveData.def = pref.getInt("def", 8);
+            SaveData.statp = pref.getInt("statp", 0);
             SaveData.index = pref.getInt("index", 0);
         }
 
@@ -79,6 +81,7 @@ public class GameActivity extends AppCompatActivity {
         edit.putInt("hp", SaveData.hp);
         edit.putInt("str", SaveData.str);
         edit.putInt("def", SaveData.def);
+        edit.putInt("statp", SaveData.statp);
         edit.putInt("index", SaveData.index);
         edit.commit();
     }
