@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.feetfall.GameActivity;
 import com.example.feetfall.R;
 import java.util.List;
 import butterknife.BindView;
@@ -40,6 +42,56 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
         holder.tvDecFirst.setText(decision.getInitialText());
         holder.btDec1.setText(decision.getDec1().text);
         holder.btDec2.setText(decision.getDec2().text);
+
+        holder.btDec1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.tvDecSec.setText(decision.getDec1().result);
+                holder.btDec1.setEnabled(false);
+                holder.btDec2.setEnabled(false);
+
+                SaveData.addExp(decision.getDec1().exp);
+                SaveData.damage(decision.getDec1().hp);
+                if((SaveData.str < decision.getDec1().str) || (SaveData.def < decision.getDec1().def)) {
+                    if(decision.getDec1().failure != null) {
+                        GameActivity.decisions.add(decision.getDec1().failure);
+                        SaveData.index = Story.list.indexOf(decision.getDec1().failure);
+                        GameActivity.adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    if(decision.getDec1().success != null) {
+                        GameActivity.decisions.add(decision.getDec1().success);
+                        SaveData.index = Story.list.indexOf(decision.getDec1().success);
+                        GameActivity.adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+
+        holder.btDec2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.tvDecSec.setText(decision.getDec2().result);
+                holder.btDec1.setEnabled(false);
+                holder.btDec2.setEnabled(false);
+
+                SaveData.addExp(decision.getDec2().exp);
+                SaveData.damage(decision.getDec2().hp);
+                if((SaveData.str < decision.getDec2().str) || (SaveData.def < decision.getDec2().def)) {
+                    if(decision.getDec2().failure != null) {
+                        GameActivity.decisions.add(decision.getDec2().failure);
+                        SaveData.index = Story.list.indexOf(decision.getDec2().failure);
+                        GameActivity.adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    if(decision.getDec2().success != null) {
+                        GameActivity.decisions.add(decision.getDec2().success);
+                        SaveData.index = Story.list.indexOf(decision.getDec2().success);
+                        GameActivity.adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
     }
 
     @Override
