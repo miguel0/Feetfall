@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 public class GameActivity extends AppCompatActivity {
 
-    private SharedPreferences pref;
+    private static SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void saveData() {
+    public static void saveData() {
         SharedPreferences.Editor edit = pref.edit();
         edit.putInt("lvl", SaveData.lvl);
         edit.putInt("maxExp", SaveData.maxExp);
