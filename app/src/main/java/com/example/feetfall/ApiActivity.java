@@ -30,7 +30,7 @@ public class ApiActivity extends AppCompatActivity {
         ivImg = findViewById(R.id.iv);
         cntx = this;
 
-        String uris = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC";
+        String uris = "https://api.giphy.com/v1/gifs/random?api_key=1Gor3Owx7t1K4Sia7oXg9cc408bDYnKU";
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(uris,null,new JsonHttpResponseHandler() {
             @Override
