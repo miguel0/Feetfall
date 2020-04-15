@@ -1,17 +1,12 @@
 package com.example.feetfall;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.loopj.android.http.*;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,9 +27,9 @@ public class ApiActivity extends AppCompatActivity {
 
         String uris = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC";
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(uris,null,new JsonHttpResponseHandler() {
+        client.get(uris,null, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess ( int statusCode, Header[] headers, JSONObject response){
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 String gif = "";
                 try {
                     JSONObject data = response.getJSONObject("data");

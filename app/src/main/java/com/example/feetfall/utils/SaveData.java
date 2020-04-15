@@ -9,6 +9,7 @@ public class SaveData {
     public static int hp = 50;
     public static int str = 10;
     public static int def = 8;
+    public static int index = 0;
 
     public static void addExp(int n) {
         exp += n;
@@ -20,6 +21,13 @@ public class SaveData {
             hp = maxHp;
             str *= 1.2;
             def *= 1.2;
+        }
+    }
+
+    public static void damage(int n) {
+        hp -= n;
+        if(n < 0) {
+            hp = 0;
         }
     }
 }
