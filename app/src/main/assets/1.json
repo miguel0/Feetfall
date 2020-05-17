@@ -6,11 +6,11 @@
     The light of your window becomes the scorching sun of the middle of the day.
     The confortable bed becomes a bunch of pointy hay.
     And as you rise new smells strike your nose.
-    Oh... is that horse shit?", exp: 3, hp: 49, str: 0, def: 0, success: "1_11", failure: "1_12"},
+    Oh... is that horse shit?", exp: 3, hp: 49, str: 0, def: 0, "requires": "key", success: "1_11", failure: "1_12"},
     {text: "Sleep 5 minutes more", result: "You welcome the darkness and tighten your eyes, letting yourself become one with the void.
       But suddenly, you have trouble breathing.
       Your heart rate intensifies and feel a crushing weight on you throat.
       You open your eyes to give one more look to the world around you, as it disappears...
-      You leave this world, with nothing but a pale look.", exp: 0, hp: 1000, str: 0, def: 0, success: "1_21", failure: "1_22"}
+      You leave this world, with nothing but a pale look.", exp: 0, hp: 1000, str: 0, def: 0, "requires": "lotion", success: "1_11", failure: "1_12"}
   ]
 }
