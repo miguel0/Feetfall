@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.feetfall.R;
+import com.example.feetfall.StatsActivity;
 import com.example.feetfall.utils.SaveData;
 
 import butterknife.BindView;
@@ -32,12 +33,30 @@ public class EquipmentFragment extends Fragment {
 
         if(SaveData.helmet != null) {
             Glide.with(getContext()).load(SaveData.helmet.getImageId()).into(ivHelmet);
+
+            ivHelmet.setOnClickListener(v -> {
+                SaveData.items.add(SaveData.helmet);
+                SaveData.helmet = null;
+                ivHelmet.setImageDrawable(null);
+            });
         }
         if(SaveData.weapon != null) {
             Glide.with(getContext()).load(SaveData.weapon.getImageId()).into(ivWeapon);
+
+            ivWeapon.setOnClickListener(v -> {
+                SaveData.items.add(SaveData.weapon);
+                SaveData.weapon = null;
+                ivWeapon.setImageDrawable(null);
+            });
         }
         if(SaveData.armor != null) {
             Glide.with(getContext()).load(SaveData.armor.getImageId()).into(ivArmor);
+
+            ivArmor.setOnClickListener(v -> {
+                SaveData.items.add(SaveData.armor);
+                SaveData.armor = null;
+                ivArmor.setImageDrawable(null);
+            });
         }
 
         return view;
