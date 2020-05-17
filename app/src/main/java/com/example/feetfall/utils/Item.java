@@ -9,6 +9,10 @@ public class Item {
     private String name;
     private int imageId;
 
+    public Item() {
+        this("potion");
+    }
+
     public Item(String name) {
         this.name = name;
 
@@ -36,6 +40,11 @@ public class Item {
                 ad.setMessage("You can't use that item here.");
                 ad.setButton("Ok", (dialog, which) -> dialog.dismiss());
                 ad.show();
+                break;
+            default:
+                if(this instanceof Weapon) {
+                    ((Weapon) this).equip();
+                }
         }
     }
 
@@ -45,5 +54,13 @@ public class Item {
 
     public int getImageId() {
         return imageId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }

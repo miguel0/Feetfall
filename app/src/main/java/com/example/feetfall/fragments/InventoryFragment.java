@@ -14,6 +14,7 @@ import com.example.feetfall.R;
 import com.example.feetfall.utils.Item;
 import com.example.feetfall.utils.ItemAdapter;
 import com.example.feetfall.utils.SaveData;
+import com.example.feetfall.utils.Weapon;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,10 +39,6 @@ public class InventoryFragment extends Fragment {
 
         GridLayoutManager glm = new GridLayoutManager(getContext(), 3);
         rvItems.setLayoutManager(glm);
-
-        SaveData.items.add(new Item("potion"));
-        SaveData.items.add(new Item("key"));
-        SaveData.items.add(new Item("potion"));
 
         return view;
     }

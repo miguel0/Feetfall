@@ -16,6 +16,7 @@ import com.example.feetfall.utils.DecisionAdapter;
 import com.example.feetfall.utils.Item;
 import com.example.feetfall.utils.SaveData;
 import com.example.feetfall.utils.Story;
+import com.example.feetfall.utils.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,9 @@ public class GameActivity extends AppCompatActivity {
             SaveData.statp = 0;
             SaveData.index = "1";
             SaveData.items = new ArrayList<>();
+            SaveData.helmet = null;
+            SaveData.weapon = null;
+            SaveData.armor = null;
         } else {
             SaveData.lvl = pref.getInt("lvl", 1);
             SaveData.maxExp = pref.getInt("maxExp", 5);
@@ -64,7 +68,28 @@ public class GameActivity extends AppCompatActivity {
             SaveData.index = pref.getString("index", "1");
 
             for(String i : pref.getString("items", "").split(",")) {
-                SaveData.items.add(new Item(i));
+                if(i.charAt(0) == 'w') {
+                    SaveData.items.add(new Weapon(i.substring(1)));
+                } else {
+                    SaveData.items.add(new Item(i.substring(1)));
+                }
+            }
+
+            String temp;
+            if(!(temp = pref.getString("helmet", "")).equals("")) {
+                SaveData.helmet = new Weapon(temp);
+            } else {
+                SaveData.helmet = null;
+            }
+            if(!(temp = pref.getString("weapon", "")).equals("")) {
+                SaveData.weapon = new Weapon(temp);
+            } else {
+                SaveData.weapon = null;
+            }
+            if(!(temp = pref.getString("armor", "")).equals("")) {
+                SaveData.armor = new Weapon(temp);
+            } else {
+                SaveData.armor = null;
             }
         }
 
@@ -74,6 +99,16 @@ public class GameActivity extends AppCompatActivity {
         rvDecisions.setLayoutManager(new LinearLayoutManager(this));
 
         decisions.add(adapter.mapDecision(this,SaveData.index));
+
+        SaveData.items.add(new Item("potion"));
+        SaveData.items.add(new Item("key"));
+        SaveData.items.add(new Item("potion"));
+        SaveData.items.add(new Weapon("sword"));
+        SaveData.items.add(new Weapon("axe"));
+        SaveData.items.add(new Weapon("paper hat"));
+        SaveData.items.add(new Weapon("crusader helmet"));
+        SaveData.items.add(new Weapon("dress"));
+        SaveData.items.add(new Weapon("god dress"));
     }
 
     public static void saveData() {
@@ -90,10 +125,33 @@ public class GameActivity extends AppCompatActivity {
 
         StringBuilder sb = new StringBuilder();
         for(Item i : SaveData.items) {
-            sb.append(i.getName());
+            if(i instanceof Weapon) {
+                sb.append("w" + i.getName());
+            } else {
+                sb.append("i" + i.getName());
+            }
+
             sb.append(",");
         }
         edit.putString("items", sb.toString());
+
+        if(SaveData.helmet != null) {
+            edit.putString("helmet", SaveData.helmet.getName());
+        } else {
+            edit.putString("helmet", "");
+        }
+
+        if(SaveData.weapon != null) {
+            edit.putString("weapon", SaveData.weapon.getName());
+        } else {
+            edit.putString("weapon", "");
+        }
+
+        if(SaveData.armor != null) {
+            edit.putString("armor", SaveData.armor.getName());
+        } else {
+            edit.putString("armor", "");
+        }
 
         edit.commit();
     }

@@ -14,6 +14,9 @@ public class SaveData {
     public static int statp = 0;
     public static String index = "1";
     public static ArrayList<Item> items = new ArrayList<>();
+    public static Weapon helmet = null;
+    public static Weapon weapon = null;
+    public static Weapon armor = null;
 
     public static ItemAdapter adapter;
 
@@ -40,5 +43,37 @@ public class SaveData {
 
     public static void recover(int n) {
         damage(-n);
+    }
+
+    public static int getStr() {
+        int res = str;
+
+        if(helmet != null) {
+            res += helmet.getStr();
+        }
+        if(weapon != null) {
+            res += weapon.getStr();
+        }
+        if(armor != null) {
+            res += armor.getStr();
+        }
+
+        return res;
+    }
+
+    public static int getDef() {
+        int res = def;
+
+        if(helmet != null) {
+            res += helmet.getDef();
+        }
+        if(weapon != null) {
+            res += weapon.getDef();
+        }
+        if(armor != null) {
+            res += armor.getDef();
+        }
+
+        return res;
     }
 }

@@ -5,14 +5,46 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.example.feetfall.R;
+import com.example.feetfall.utils.SaveData;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class EquipmentFragment extends Fragment {
+
+    private Unbinder unbinder;
+
+    @BindView(R.id.ivHelmet) ImageView ivHelmet;
+    @BindView(R.id.ivWeapon) ImageView ivWeapon;
+    @BindView(R.id.ivArmor) ImageView ivArmor;
 
     public EquipmentFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_equipment, container, false);
+        View view = inflater.inflate(R.layout.fragment_equipment, container, false);
+        unbinder = ButterKnife.bind(this, view);
+
+        if(SaveData.helmet != null) {
+            Glide.with(getContext()).load(SaveData.helmet.getImageId()).into(ivHelmet);
+        }
+        if(SaveData.weapon != null) {
+            Glide.with(getContext()).load(SaveData.weapon.getImageId()).into(ivWeapon);
+        }
+        if(SaveData.armor != null) {
+            Glide.with(getContext()).load(SaveData.armor.getImageId()).into(ivArmor);
+        }
+
+        return view;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
