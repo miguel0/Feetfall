@@ -27,7 +27,6 @@ public class GameActivity extends AppCompatActivity {
     private static SharedPreferences pref;
     public static List<Decision> decisions;
     public static DecisionAdapter adapter;
-    public static Story story;
 
     @BindView(R.id.rvDecisions) RecyclerView rvDecisions;
 
@@ -51,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
             SaveData.str = 10;
             SaveData.def = 8;
             SaveData.statp = 0;
-            SaveData.index = 0;
+            SaveData.index = "1";
             SaveData.items = new ArrayList<>();
         } else {
             SaveData.lvl = pref.getInt("lvl", 1);
@@ -62,21 +61,19 @@ public class GameActivity extends AppCompatActivity {
             SaveData.str = pref.getInt("str", 10);
             SaveData.def = pref.getInt("def", 8);
             SaveData.statp = pref.getInt("statp", 0);
-            SaveData.index = pref.getInt("index", 0);
+            SaveData.index = pref.getString("index", "1");
 
             for(String i : pref.getString("items", "").split(",")) {
                 SaveData.items.add(new Item(i));
             }
-
         }
 
         decisions = new ArrayList<>();
-        adapter = new DecisionAdapter(decisions);
+        adapter = new DecisionAdapter(this, decisions);
         rvDecisions.setAdapter(adapter);
         rvDecisions.setLayoutManager(new LinearLayoutManager(this));
 
-        story = new Story();
-        decisions.add(Story.list.get(SaveData.index));
+        decisions.add(adapter.mapDecision(this,SaveData.index));
     }
 
     public static void saveData() {
@@ -89,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
         edit.putInt("str", SaveData.str);
         edit.putInt("def", SaveData.def);
         edit.putInt("statp", SaveData.statp);
-        edit.putInt("index", SaveData.index);
+        edit.putString("index", SaveData.index);
 
         StringBuilder sb = new StringBuilder();
         for(Item i : SaveData.items) {
