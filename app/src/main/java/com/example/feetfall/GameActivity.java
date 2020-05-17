@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.example.feetfall.utils.Decision;
 import com.example.feetfall.utils.DecisionAdapter;
+import com.example.feetfall.utils.Item;
 import com.example.feetfall.utils.SaveData;
 import com.example.feetfall.utils.Story;
 
@@ -51,6 +52,7 @@ public class GameActivity extends AppCompatActivity {
             SaveData.def = 8;
             SaveData.statp = 0;
             SaveData.index = 0;
+            SaveData.items = new ArrayList<>();
         } else {
             SaveData.lvl = pref.getInt("lvl", 1);
             SaveData.maxExp = pref.getInt("maxExp", 5);
@@ -61,6 +63,11 @@ public class GameActivity extends AppCompatActivity {
             SaveData.def = pref.getInt("def", 8);
             SaveData.statp = pref.getInt("statp", 0);
             SaveData.index = pref.getInt("index", 0);
+
+            for(String i : pref.getString("items", "").split(",")) {
+                SaveData.items.add(new Item(i));
+            }
+
         }
 
         decisions = new ArrayList<>();
@@ -83,6 +90,14 @@ public class GameActivity extends AppCompatActivity {
         edit.putInt("def", SaveData.def);
         edit.putInt("statp", SaveData.statp);
         edit.putInt("index", SaveData.index);
+
+        StringBuilder sb = new StringBuilder();
+        for(Item i : SaveData.items) {
+            sb.append(i.getName());
+            sb.append(",");
+        }
+        edit.putString("items", sb.toString());
+
         edit.commit();
     }
 

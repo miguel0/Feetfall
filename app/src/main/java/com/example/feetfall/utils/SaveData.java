@@ -1,5 +1,7 @@
 package com.example.feetfall.utils;
 
+import java.util.ArrayList;
+
 public class SaveData {
     // Stats
     public static int lvl = 1;
@@ -11,6 +13,9 @@ public class SaveData {
     public static int def = 8;
     public static int statp = 0;
     public static int index = 0;
+    public static ArrayList<Item> items = new ArrayList<>();
+
+    public static ItemAdapter adapter;
 
     public static void addExp(int n) {
         exp += n;
@@ -28,6 +33,12 @@ public class SaveData {
         hp -= n;
         if(hp < 0) {
             hp = 0;
+        } else if(hp > maxHp) {
+            hp = maxHp;
         }
+    }
+
+    public static void recover(int n) {
+        damage(-n);
     }
 }
