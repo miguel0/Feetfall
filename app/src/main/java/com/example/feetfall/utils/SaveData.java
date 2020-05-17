@@ -10,7 +10,7 @@ public class SaveData {
     public static int str = 10;
     public static int def = 8;
     public static int statp = 0;
-    public static int index = 0;
+    public static String index = "";
 
     public static void addExp(int n) {
         exp += n;

@@ -29,7 +29,7 @@ public class Story {
     private String bt21 = "Walk aorund in search of clues";
     private String bt22 = "Talk to a lady with a crying baby";
 
-
+/*
     private Decision d3_2 = new Decision(text32, new DecisionButton("You", "", 0, 0, 0, 0, null, null),
             new DecisionButton("died", "", 0, 0, 0, 0, null, null));
 
@@ -41,14 +41,14 @@ public class Story {
 
     private Decision d1 = new Decision(text1, new DecisionButton(bt11, result11, 6, 49, 0, 0, d2, null),
             new DecisionButton(bt12, result12, 0, 1000, 0, 0, null, null));
-
+*/
     public Story() {
         list = new ArrayList<>();
-
+/*
         list.add(d1);
         list.add(d2);
         list.add(d3_1);
         list.add(d3_2);
-
+*/
     }
 }
