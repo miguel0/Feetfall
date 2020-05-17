@@ -65,20 +65,22 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
 
                 SaveData.addExp(decision.getDec1().exp);
                 SaveData.damage(decision.getDec1().hp);
-                if((SaveData.str < decision.getDec1().str) || (SaveData.def < decision.getDec1().def)) {
-                    if(decision.getDec1().failure != null) {
-                        Decision nextDecision = mapDecision(context, decision.getDec1().failure);
-                        GameActivity.decisions.add(nextDecision);
-                        SaveData.index = decision.getDec1().failure;
-                        GameActivity.adapter.notifyDataSetChanged();
-                    }
+                boolean fulfills = false;
+                Item usedItem = searchItem(decision.getDec1().requires);
+                if(decision.getDec1().requires.equals("") || usedItem != null) {
+                    fulfills = true;
+                }
+                if(fulfills && (SaveData.str >= decision.getDec1().str) && (SaveData.def >= decision.getDec1().def)) {
+                    SaveData.items.remove(usedItem);
+                    Decision nextDecision = mapDecision(context, decision.getDec1().success);
+                    GameActivity.decisions.add(nextDecision);
+                    SaveData.index = decision.getDec1().success;
+                    GameActivity.adapter.notifyDataSetChanged();
                 } else {
-                    if(decision.getDec1().success != null) {
-                        Decision nextDecision = mapDecision(context, decision.getDec1().success);
-                        GameActivity.decisions.add(nextDecision);
-                        SaveData.index = decision.getDec1().success;
-                        GameActivity.adapter.notifyDataSetChanged();
-                    }
+                    Decision nextDecision = mapDecision(context, decision.getDec1().failure);
+                    GameActivity.decisions.add(nextDecision);
+                    SaveData.index = decision.getDec1().failure;
+                    GameActivity.adapter.notifyDataSetChanged();
                 }
             }
         });
@@ -92,20 +94,22 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
 
                 SaveData.addExp(decision.getDec2().exp);
                 SaveData.damage(decision.getDec2().hp);
-                if((SaveData.str < decision.getDec2().str) || (SaveData.def < decision.getDec2().def)) {
-                    if(decision.getDec2().failure != null) {
-                        Decision nextDecision = mapDecision(context, decision.getDec2().failure);
-                        GameActivity.decisions.add(nextDecision);
-                        SaveData.index = decision.getDec2().failure;
-                        GameActivity.adapter.notifyDataSetChanged();
-                    }
+                boolean fulfills = false;
+                Item usedItem = searchItem(decision.getDec2().requires);
+                if(decision.getDec2().requires.equals("") || usedItem != null) {
+                    fulfills = true;
+                }
+                if(fulfills && (SaveData.str >= decision.getDec2().str) && (SaveData.def >= decision.getDec2().def)) {
+                    SaveData.items.remove(usedItem);
+                    Decision nextDecision = mapDecision(context, decision.getDec2().success);
+                    GameActivity.decisions.add(nextDecision);
+                    SaveData.index = decision.getDec2().success;
+                    GameActivity.adapter.notifyDataSetChanged();
                 } else {
-                    if(decision.getDec2().success != null) {
-                        Decision nextDecision = mapDecision(context, decision.getDec2().success);
-                        GameActivity.decisions.add(nextDecision);
-                        SaveData.index = decision.getDec2().success;
-                        GameActivity.adapter.notifyDataSetChanged();
-                    }
+                    Decision nextDecision = mapDecision(context, decision.getDec2().failure);
+                    GameActivity.decisions.add(nextDecision);
+                    SaveData.index = decision.getDec2().failure;
+                    GameActivity.adapter.notifyDataSetChanged();
                 }
             }
         });
@@ -129,6 +133,15 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
         }
     }
 
+    private Item searchItem(String name) {
+        for(Item item : SaveData.items) {
+            if(item.getName().equals(name)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     public Decision mapDecision(Context context, String file) {
         try{
             JSONObject raw = new JSONObject(loadJSONFromAsset(context, file));
@@ -143,6 +156,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     db1json.getInt("hp"),
                     db1json.getInt("str"),
                     db1json.getInt("def"),
+                    db1json.getString("requires").toString(),
                     db1json.getString("success").toString(),
                     db1json.getString("failure").toString()
             );
@@ -155,6 +169,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     db2json.getInt("hp"),
                     db2json.getInt("str"),
                     db2json.getInt("def"),
+                    db2json.getString("requires").toString(),
                     db2json.getString("success").toString(),
                     db2json.getString("failure").toString()
             );
