@@ -1,6 +1,7 @@
 package com.example.feetfall.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,87 +57,107 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
         holder.btDec1.setText(decision.getDec1().text);
         holder.btDec2.setText(decision.getDec2().text);
 
-        holder.btDec1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.tvDecSec.setText(decision.getDec1().result);
-                holder.btDec1.setEnabled(false);
-                holder.btDec2.setEnabled(false);
-
-                SaveData.addExp(decision.getDec1().exp);
-                SaveData.damage(decision.getDec1().hp);
-                boolean fulfills = false;
-                Item usedItem = searchItem(decision.getDec1().requires);
-                if(decision.getDec1().requires.length() == 0 || usedItem != null) {
-                    fulfills = true;
-                }
-                if(fulfills && (SaveData.str >= decision.getDec1().str) && (SaveData.def >= decision.getDec1().def)) {
-                    SaveData.items.remove(usedItem);
-                    Decision nextDecision = mapDecision(context, decision.getDec1().success);
-                    GameActivity.decisions.add(nextDecision);
-                    SaveData.index = decision.getDec1().success;
-                    if(nextDecision.getItem().length() > 0) {
-                        SaveData.items.add(new Item(nextDecision.getItem()));
-                    }
-                    if(nextDecision.getEquipment().length() > 0) {
-                        SaveData.items.add(new Weapon(nextDecision.getEquipment()));
-                    }
-                    GameActivity.adapter.notifyDataSetChanged();
-                } else {
-                    Decision nextDecision = mapDecision(context, decision.getDec1().failure);
-                    GameActivity.decisions.add(nextDecision);
-                    SaveData.index = decision.getDec1().failure;
-                    if(nextDecision.getItem().length() > 0) {
-                        SaveData.items.add(new Item(nextDecision.getItem()));
-                    }
-                    if(nextDecision.getEquipment().length() > 0) {
-                        SaveData.items.add(new Weapon(nextDecision.getEquipment()));
-                    }
-                    GameActivity.adapter.notifyDataSetChanged();
-                }
+        if(!decision.decided) {
+            if(decision.getDec1().text.length() < 1) {
+                holder.tvDecSec.setText("");
+                return;
             }
-        });
 
-        holder.btDec2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.tvDecSec.setText(decision.getDec2().result);
-                holder.btDec1.setEnabled(false);
-                holder.btDec2.setEnabled(false);
+            holder.btDec1.setEnabled(true);
+            holder.btDec2.setEnabled(true);
 
-                SaveData.addExp(decision.getDec2().exp);
-                SaveData.damage(decision.getDec2().hp);
-                boolean fulfills = false;
-                Item usedItem = searchItem(decision.getDec2().requires);
-                if(decision.getDec2().requires.length() == 0 || usedItem != null) {
-                    fulfills = true;
+            holder.btDec1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    decision.decided = true;
+                    decision.decision = 1;
+
+                    holder.tvDecSec.setText(decision.getDec1().result);
+                    holder.btDec1.setEnabled(false);
+                    holder.btDec2.setEnabled(false);
+
+                    SaveData.addExp(decision.getDec1().exp);
+                    SaveData.damage(decision.getDec1().hp);
+                    boolean fulfills = false;
+                    Item usedItem = searchItem(decision.getDec1().requires);
+                    if (decision.getDec1().requires.length() == 0 || usedItem != null) {
+                        fulfills = true;
+                    }
+                    if (fulfills && (SaveData.getStr() >= decision.getDec1().str) && (SaveData.getDef() >= decision.getDec1().def)) {
+                        SaveData.items.remove(usedItem);
+                        Decision nextDecision = mapDecision(context, decision.getDec1().success);
+                        GameActivity.decisions.add(nextDecision);
+                        SaveData.index = decision.getDec1().success;
+                        if (nextDecision.getItem().length() > 0) {
+                            SaveData.items.add(new Item(nextDecision.getItem()));
+                        }
+                        if (nextDecision.getEquipment().length() > 0) {
+                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
+                        }
+                        GameActivity.adapter.notifyDataSetChanged();
+                    } else {
+                        Decision nextDecision = mapDecision(context, decision.getDec1().failure);
+                        GameActivity.decisions.add(nextDecision);
+                        SaveData.index = decision.getDec1().failure;
+                        if (nextDecision.getItem().length() > 0) {
+                            SaveData.items.add(new Item(nextDecision.getItem()));
+                        }
+                        if (nextDecision.getEquipment().length() > 0) {
+                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
+                        }
+                        GameActivity.adapter.notifyDataSetChanged();
+                    }
                 }
-                if(fulfills && (SaveData.str >= decision.getDec2().str) && (SaveData.def >= decision.getDec2().def)) {
-                    SaveData.items.remove(usedItem);
-                    Decision nextDecision = mapDecision(context, decision.getDec2().success);
-                    GameActivity.decisions.add(nextDecision);
-                    SaveData.index = decision.getDec2().success;
-                    if(nextDecision.getItem().length() > 0) {
-                        SaveData.items.add(new Item(nextDecision.getItem()));
+            });
+
+            holder.btDec2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    decision.decided = true;
+                    decision.decision = 2;
+
+                    holder.tvDecSec.setText(decision.getDec2().result);
+                    holder.btDec1.setEnabled(false);
+                    holder.btDec2.setEnabled(false);
+
+                    SaveData.addExp(decision.getDec2().exp);
+                    SaveData.damage(decision.getDec2().hp);
+                    boolean fulfills = false;
+                    Item usedItem = searchItem(decision.getDec2().requires);
+                    if (decision.getDec2().requires.length() == 0 || usedItem != null) {
+                        fulfills = true;
                     }
-                    if(nextDecision.getEquipment().length() > 0) {
-                        SaveData.items.add(new Weapon(nextDecision.getEquipment()));
+                    if (fulfills && (SaveData.getStr() >= decision.getDec2().str) && (SaveData.getDef() >= decision.getDec2().def)) {
+                        SaveData.items.remove(usedItem);
+                        Decision nextDecision = mapDecision(context, decision.getDec2().success);
+                        GameActivity.decisions.add(nextDecision);
+                        SaveData.index = decision.getDec2().success;
+                        if (nextDecision.getItem().length() > 0) {
+                            SaveData.items.add(new Item(nextDecision.getItem()));
+                        }
+                        if (nextDecision.getEquipment().length() > 0) {
+                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
+                        }
+                        GameActivity.adapter.notifyDataSetChanged();
+                    } else {
+                        Decision nextDecision = mapDecision(context, decision.getDec2().failure);
+                        GameActivity.decisions.add(nextDecision);
+                        SaveData.index = decision.getDec2().failure;
+                        if (nextDecision.getItem().length() > 0) {
+                            SaveData.items.add(new Item(nextDecision.getItem()));
+                        }
+                        if (nextDecision.getEquipment().length() > 0) {
+                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
+                        }
+                        GameActivity.adapter.notifyDataSetChanged();
                     }
-                    GameActivity.adapter.notifyDataSetChanged();
-                } else {
-                    Decision nextDecision = mapDecision(context, decision.getDec2().failure);
-                    GameActivity.decisions.add(nextDecision);
-                    SaveData.index = decision.getDec2().failure;
-                    if(nextDecision.getItem().length() > 0) {
-                        SaveData.items.add(new Item(nextDecision.getItem()));
-                    }
-                    if(nextDecision.getEquipment().length() > 0) {
-                        SaveData.items.add(new Weapon(nextDecision.getEquipment()));
-                    }
-                    GameActivity.adapter.notifyDataSetChanged();
                 }
-            }
-        });
+            });
+        } else if(decision.decision == 1) {
+            holder.tvDecSec.setText(decision.getDec1().result);
+        } else {
+            holder.tvDecSec.setText(decision.getDec2().result);
+        }
     }
 
     @Override

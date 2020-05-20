@@ -4,6 +4,8 @@ public class Decision {
 
     private String initialText, item, equipment;
     private DecisionButton dec1, dec2;
+    public boolean decided;
+    public int decision;
 
     public Decision(String initialText, String item, String equipment, DecisionButton dec1, DecisionButton dec2) {
         this.initialText = initialText;
@@ -11,6 +13,8 @@ public class Decision {
         this.equipment = equipment;
         this.dec1 = dec1;
         this.dec2 = dec2;
+        decided = false;
+        decision = 0;
     }
 
     public String getInitialText() {
