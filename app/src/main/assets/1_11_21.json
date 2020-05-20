@@ -1,0 +1,13 @@
+{
+  "initialText": "Arriving at the market, you see a door with a lock, and a poker table far away with nasty people. You:" ,
+  "item": "",
+  "equipment": "",
+  "decisions": [
+    {
+      "text": "Go check the door", "result": "Where can it lead?", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "key", "success": "1_11_11_11", "failure": "1_12"
+    },
+    {
+      "text": "Go to ask directions to those gentlemans", "result": "I'm sure they'll know where we are", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "1_11_11_21", "failure": "1_12"
+    }
+  ]
+}

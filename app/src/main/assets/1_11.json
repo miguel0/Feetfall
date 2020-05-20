@@ -1,9 +1,13 @@
 {
-  "initialText":"You stand up and look around you. \\\"What's with everybody's dressing?\\\", you think, as people in dirty rags come and go, walking in the dirt, carrying wasted bags and mounting grubby horses. A very unpleasant odor fill the air. As you ask yourself \\\"Where the fuck am I?\\\", you:\"",
+  "initialText":"You stand up and look around you. \"What's with everybody's dressing?\",you think, as people in dirty rags come and go, walking in the dirt, carrying wasted bags and mounting grubby horses. A very unpleasant odor fill the air. As you ask yourself \"Where the fuck am I?\", you:",
+  "item": "",
+  "equipment": "",
   "decisions": [
     {
-      "text": "Test1", "result": "Result1", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": ""},
+      "text": "Look inside the hay for clues", "result": "Ouch, the hay is pointy", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "1_11_11", "failure": "1_12"
+    },
     {
-      "text": "Test2", "result": "Result2", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": ""}
+      "text": "Go to that suspiciously looking market ova there", "result": "Let's see what I can find", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "1_11_21", "failure": "1_12"
+    }
   ]
 }

@@ -75,11 +75,23 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     Decision nextDecision = mapDecision(context, decision.getDec1().success);
                     GameActivity.decisions.add(nextDecision);
                     SaveData.index = decision.getDec1().success;
+                    if(nextDecision.getItem() != "") {
+                        SaveData.items.add(new Item(nextDecision.getItem()));
+                    }
+                    if(nextDecision.getEquipment() != "") {
+                        SaveData.items.add(new Weapon(nextDecision.getItem()));
+                    }
                     GameActivity.adapter.notifyDataSetChanged();
                 } else {
                     Decision nextDecision = mapDecision(context, decision.getDec1().failure);
                     GameActivity.decisions.add(nextDecision);
                     SaveData.index = decision.getDec1().failure;
+                    if(nextDecision.getItem() != "") {
+                        SaveData.items.add(new Item(nextDecision.getItem()));
+                    }
+                    if(nextDecision.getEquipment() != "") {
+                        SaveData.items.add(new Weapon(nextDecision.getItem()));
+                    }
                     GameActivity.adapter.notifyDataSetChanged();
                 }
             }
@@ -104,11 +116,23 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     Decision nextDecision = mapDecision(context, decision.getDec2().success);
                     GameActivity.decisions.add(nextDecision);
                     SaveData.index = decision.getDec2().success;
+                    if(nextDecision.getItem() != "") {
+                        SaveData.items.add(new Item(nextDecision.getItem()));
+                    }
+                    if(nextDecision.getEquipment() != "") {
+                        SaveData.items.add(new Weapon(nextDecision.getItem()));
+                    }
                     GameActivity.adapter.notifyDataSetChanged();
                 } else {
                     Decision nextDecision = mapDecision(context, decision.getDec2().failure);
                     GameActivity.decisions.add(nextDecision);
                     SaveData.index = decision.getDec2().failure;
+                    if(nextDecision.getItem() != "") {
+                        SaveData.items.add(new Item(nextDecision.getItem()));
+                    }
+                    if(nextDecision.getEquipment() != "") {
+                        SaveData.items.add(new Weapon(nextDecision.getItem()));
+                    }
                     GameActivity.adapter.notifyDataSetChanged();
                 }
             }
@@ -145,36 +169,38 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
     public Decision mapDecision(Context context, String file) {
         try{
             JSONObject raw = new JSONObject(loadJSONFromAsset(context, file));
-            String initialText = raw.get("initialText").toString();
+            String initialText = raw.getString("initialText");
+            String item = raw.getString("item");
+            String equipment = raw.getString("equipment");
             JSONArray decisions = raw.getJSONArray("decisions");
 
             JSONObject db1json = decisions.getJSONObject(0);
                     DecisionButton db1 = new DecisionButton(
-                    db1json.getString("text").toString(),
-                    db1json.getString("result").toString(),
+                    db1json.getString("text"),
+                    db1json.getString("result"),
                     db1json.getInt("exp"),
                     db1json.getInt("hp"),
                     db1json.getInt("str"),
                     db1json.getInt("def"),
-                    db1json.getString("requires").toString(),
-                    db1json.getString("success").toString(),
-                    db1json.getString("failure").toString()
+                    db1json.getString("requires"),
+                    db1json.getString("success"),
+                    db1json.getString("failure")
             );
 
             JSONObject db2json = decisions.getJSONObject(1);
             DecisionButton db2 = new DecisionButton(
-                    db2json.getString("text").toString(),
-                    db2json.getString("result").toString(),
+                    db2json.getString("text"),
+                    db2json.getString("result"),
                     db2json.getInt("exp"),
                     db2json.getInt("hp"),
                     db2json.getInt("str"),
                     db2json.getInt("def"),
-                    db2json.getString("requires").toString(),
-                    db2json.getString("success").toString(),
-                    db2json.getString("failure").toString()
+                    db2json.getString("requires"),
+                    db2json.getString("success"),
+                    db2json.getString("failure")
             );
 
-            Decision decision = new Decision(initialText, db1, db2);
+            Decision decision = new Decision(initialText, item, equipment, db1, db2);
             return decision;
         } catch (JSONException e) {
             e.printStackTrace();

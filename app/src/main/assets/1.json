@@ -1,16 +1,18 @@
 {
-  initialText: "You suddenly appear, in the darkness, feeling like waking up. But a confortable bed, a painful headache and sore throat makes you want to sleep some more. You:",
+  initialText: "You suddenly appear, in the darkness, feeling like waking up. But a comfortable bed, a painful headache and sore throat makes you want to sleep some more. You:",
+  item:"",
+  "equipment": "",
   decisions: [
     {text: "Open your eyes and welcome the morning", result: "You rub your eyes as you yawn, not feeling completeley sure you made the right decision.
     As you lift your head, you hear a crowd closing up, revolving around you.
     The light of your window becomes the scorching sun of the middle of the day.
     The confortable bed becomes a bunch of pointy hay.
     And as you rise new smells strike your nose.
-    Oh... is that horse shit?", exp: 3, hp: 49, str: 0, def: 0, "requires": "key", success: "1_11", failure: "1_12"},
+    Oh... is that horse shit?", exp: 3, hp: 49, str: 0, def: 0, "requires": "", success: "1_11", failure: "1_12"},
     {text: "Sleep 5 minutes more", result: "You welcome the darkness and tighten your eyes, letting yourself become one with the void.
       But suddenly, you have trouble breathing.
       Your heart rate intensifies and feel a crushing weight on you throat.
       You open your eyes to give one more look to the world around you, as it disappears...
-      You leave this world, with nothing but a pale look.", exp: 0, hp: 1000, str: 0, def: 0, "requires": "lotion", success: "1_11", failure: "1_12"}
+      You leave this world, with nothing but a pale look.", exp: 0, hp: 1000, str: 0, def: 0, "requires": "", success: "1_12", failure: "1_12"}
   ]
 }

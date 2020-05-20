@@ -99,7 +99,7 @@ public class GameActivity extends AppCompatActivity {
         rvDecisions.setLayoutManager(new LinearLayoutManager(this));
 
         decisions.add(adapter.mapDecision(this,SaveData.index));
-
+/*
         SaveData.items.add(new Item("potion"));
         SaveData.items.add(new Item("key"));
         SaveData.items.add(new Item("potion"));
@@ -109,6 +109,7 @@ public class GameActivity extends AppCompatActivity {
         SaveData.items.add(new Weapon("crusader helmet"));
         SaveData.items.add(new Weapon("dress"));
         SaveData.items.add(new Weapon("god dress"));
+        */
     }
 
     public static void saveData() {
