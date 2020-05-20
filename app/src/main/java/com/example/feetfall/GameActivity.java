@@ -39,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tbGame);
         setSupportActionBar(toolbar);
-
+        SaveData.items.clear();
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         if(getIntent().getBooleanExtra("new", false)) {
