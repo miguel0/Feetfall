@@ -67,7 +67,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                 SaveData.damage(decision.getDec1().hp);
                 boolean fulfills = false;
                 Item usedItem = searchItem(decision.getDec1().requires);
-                if(decision.getDec1().requires.equals("") || usedItem != null) {
+                if(decision.getDec1().requires.length() == 0 || usedItem != null) {
                     fulfills = true;
                 }
                 if(fulfills && (SaveData.str >= decision.getDec1().str) && (SaveData.def >= decision.getDec1().def)) {
@@ -75,22 +75,22 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     Decision nextDecision = mapDecision(context, decision.getDec1().success);
                     GameActivity.decisions.add(nextDecision);
                     SaveData.index = decision.getDec1().success;
-                    if(nextDecision.getItem() != "") {
+                    if(nextDecision.getItem().length() > 0) {
                         SaveData.items.add(new Item(nextDecision.getItem()));
                     }
-                    if(nextDecision.getEquipment() != "") {
-                        SaveData.items.add(new Weapon(nextDecision.getItem()));
+                    if(nextDecision.getEquipment().length() > 0) {
+                        SaveData.items.add(new Weapon(nextDecision.getEquipment()));
                     }
                     GameActivity.adapter.notifyDataSetChanged();
                 } else {
                     Decision nextDecision = mapDecision(context, decision.getDec1().failure);
                     GameActivity.decisions.add(nextDecision);
                     SaveData.index = decision.getDec1().failure;
-                    if(nextDecision.getItem() != "") {
+                    if(nextDecision.getItem().length() > 0) {
                         SaveData.items.add(new Item(nextDecision.getItem()));
                     }
-                    if(nextDecision.getEquipment() != "") {
-                        SaveData.items.add(new Weapon(nextDecision.getItem()));
+                    if(nextDecision.getEquipment().length() > 0) {
+                        SaveData.items.add(new Weapon(nextDecision.getEquipment()));
                     }
                     GameActivity.adapter.notifyDataSetChanged();
                 }
@@ -108,7 +108,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                 SaveData.damage(decision.getDec2().hp);
                 boolean fulfills = false;
                 Item usedItem = searchItem(decision.getDec2().requires);
-                if(decision.getDec2().requires.equals("") || usedItem != null) {
+                if(decision.getDec2().requires.length() == 0 || usedItem != null) {
                     fulfills = true;
                 }
                 if(fulfills && (SaveData.str >= decision.getDec2().str) && (SaveData.def >= decision.getDec2().def)) {
@@ -116,22 +116,22 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     Decision nextDecision = mapDecision(context, decision.getDec2().success);
                     GameActivity.decisions.add(nextDecision);
                     SaveData.index = decision.getDec2().success;
-                    if(nextDecision.getItem() != "") {
+                    if(nextDecision.getItem().length() > 0) {
                         SaveData.items.add(new Item(nextDecision.getItem()));
                     }
-                    if(nextDecision.getEquipment() != "") {
-                        SaveData.items.add(new Weapon(nextDecision.getItem()));
+                    if(nextDecision.getEquipment().length() > 0) {
+                        SaveData.items.add(new Weapon(nextDecision.getEquipment()));
                     }
                     GameActivity.adapter.notifyDataSetChanged();
                 } else {
                     Decision nextDecision = mapDecision(context, decision.getDec2().failure);
                     GameActivity.decisions.add(nextDecision);
                     SaveData.index = decision.getDec2().failure;
-                    if(nextDecision.getItem() != "") {
+                    if(nextDecision.getItem().length() > 0) {
                         SaveData.items.add(new Item(nextDecision.getItem()));
                     }
-                    if(nextDecision.getEquipment() != "") {
-                        SaveData.items.add(new Weapon(nextDecision.getItem()));
+                    if(nextDecision.getEquipment().length() > 0) {
+                        SaveData.items.add(new Weapon(nextDecision.getEquipment()));
                     }
                     GameActivity.adapter.notifyDataSetChanged();
                 }
@@ -175,7 +175,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
             JSONArray decisions = raw.getJSONArray("decisions");
 
             JSONObject db1json = decisions.getJSONObject(0);
-                    DecisionButton db1 = new DecisionButton(
+            DecisionButton db1 = new DecisionButton(
                     db1json.getString("text"),
                     db1json.getString("result"),
                     db1json.getInt("exp"),
