@@ -63,8 +63,8 @@ public class StatsFragment extends Fragment {
         tvLevel.setText(String.format("Level %d", SaveData.lvl));
         tvExp.setText(String.format("Exp %d / %d", SaveData.exp, SaveData.maxExp));
         tvHp.setText(String.format("HP %d / %d", SaveData.hp, SaveData.maxHp));
-        tvStr.setText(String.format("STR %d", SaveData.str));
-        tvDef.setText(String.format("DEF %d", SaveData.def));
+        tvStr.setText(String.format("STR %d", SaveData.getStr()));
+        tvDef.setText(String.format("DEF %d", SaveData.getDef()));
         tvStatp.setText(String.format("Stat points: %d", SaveData.statp));
         if(SaveData.statp < 1) {
             btAddStr.setEnabled(false);
