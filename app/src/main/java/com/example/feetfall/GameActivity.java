@@ -68,10 +68,12 @@ public class GameActivity extends AppCompatActivity {
             SaveData.index = pref.getString("index", "1");
 
             for(String i : pref.getString("items", "").split(",")) {
-                if(i.charAt(0) == 'w') {
-                    SaveData.items.add(new Weapon(i.substring(1)));
-                } else {
-                    SaveData.items.add(new Item(i.substring(1)));
+                if(i.length() > 0) {
+                    if (i.charAt(0) == 'w') {
+                        SaveData.items.add(new Weapon(i.substring(1)));
+                    } else {
+                        SaveData.items.add(new Item(i.substring(1)));
+                    }
                 }
             }
 
