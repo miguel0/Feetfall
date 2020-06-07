@@ -7,7 +7,9 @@ import com.example.feetfall.R;
 
 public class Item {
     private String name;
+    private String actualName;
     private int imageId;
+    private String description;
 
     public Item() {
         this("potion");
@@ -18,10 +20,14 @@ public class Item {
 
         switch(name) {
             case "potion":
+                this.actualName = "Health Potion";
                 this.imageId = R.drawable.potion;
+                this.description = "A suspicious looking potion. These generally recover health in games so might as well try it.";
                 break;
             case "key":
+                this.actualName = "Door Key";
                 this.imageId = R.drawable.key;
+                this.description = "A key to use on doors. Can open any door. Why does this key open all doors? Who knows?";
                 break;
         }
     }
@@ -62,5 +68,21 @@ public class Item {
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getActualName() {
+        return actualName;
+    }
+
+    public void setActualName(String actualName) {
+        this.actualName = actualName;
     }
 }
