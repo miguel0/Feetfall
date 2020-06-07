@@ -17,36 +17,48 @@ public class Weapon extends Item {
                 def = 3;
                 type = 0;
                 setImageId(R.drawable.paperhat);
+                setActualName("Paper Hat");
+                setDescription("This doesn't look like it offers any protection. At least it looks interesting.");
                 break;
             case "crusader helmet":
                 str = 2;
                 def = 7;
                 type = 0;
                 setImageId(R.drawable.crusaderhelmet);
+                setActualName("Crusader Helmet");
+                setDescription("Helmet worn by crusaders. Perfect for praising the sun \\[T]/");
                 break;
             case "sword":
                 str = 5;
                 def = 0;
                 type = 1;
                 setImageId(R.drawable.sword);
+                setActualName("Sword");
+                setDescription("Just a regular old sword.");
                 break;
             case "axe":
                 str = 8;
                 def = 1;
                 type = 1;
                 setImageId(R.drawable.axe);
+                setActualName("Axe");
+                setDescription("Stronger than a sword. Perfect for getting rid of your enemies.");
                 break;
             case "dress":
                 str = 0;
                 def = 5;
                 type = 2;
                 setImageId(R.drawable.dress);
+                setActualName("Dress");
+                setDescription("Nothing too special going on with this dress.");
                 break;
             case "god dress":
                 str = 3;
                 def = 10;
                 type = 2;
                 setImageId(R.drawable.goddress);
+                setActualName("GOD DRESS");
+                setDescription("With the power of god you will be able to bring justice upon those who dare defy you!!");
                 break;
         }
     }

@@ -1,6 +1,7 @@
 package com.example.feetfall.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.feetfall.ItemDetailsActivity;
 import com.example.feetfall.R;
 
 import java.util.List;
@@ -58,6 +60,28 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             ivItem = itemView.findViewById(R.id.ivItem);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION) {
+                        Item temp = mItems.get(pos);
+                        Intent i = new Intent(context, ItemDetailsActivity.class);
+
+                        i.putExtra("name", temp.getActualName());
+                        i.putExtra("image", temp.getImageId());
+                        i.putExtra("description", temp.getDescription());
+                        if(temp instanceof Weapon) {
+                            i.putExtra("atk", ((Weapon) temp).getStr());
+                            i.putExtra("def", ((Weapon) temp).getDef());
+                        }
+
+                        context.startActivity(i);
+                    }
+
+                    return true;
+                }
+            });
         }
 
         @Override
