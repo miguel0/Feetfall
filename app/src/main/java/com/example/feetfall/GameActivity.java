@@ -20,6 +20,8 @@ import com.example.feetfall.utils.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -52,6 +54,9 @@ public class GameActivity extends AppCompatActivity {
             SaveData.def = 8;
             SaveData.statp = 0;
             SaveData.index = "1";
+            SaveData.checkpoints = new ArrayList<>();
+            SaveData.usedCheckpoints = new ArrayList<>();
+            SaveData.chapters = new ArrayList<>();
             SaveData.items = new ArrayList<>();
             SaveData.helmet = null;
             SaveData.weapon = null;
@@ -66,6 +71,24 @@ public class GameActivity extends AppCompatActivity {
             SaveData.def = pref.getInt("def", 8);
             SaveData.statp = pref.getInt("statp", 0);
             SaveData.index = pref.getString("index", "1");
+
+            for(String i : pref.getString("checkpoints", "").split(",")) {
+                if(i.length() > 0) {
+                    SaveData.checkpoints.add(i);
+                }
+            }
+
+            for(String i : pref.getString("usedCheckpoints", "").split(",")) {
+                if(i.length() > 0) {
+                    SaveData.usedCheckpoints.add(i);
+                }
+            }
+
+            for(String i : pref.getString("chapters", "").split(",")) {
+                if(i.length() > 0) {
+                    SaveData.chapters.add(i);
+                }
+            }
 
             for(String i : pref.getString("items", "").split(",")) {
                 if(i.length() > 0) {
@@ -99,8 +122,22 @@ public class GameActivity extends AppCompatActivity {
         adapter = new DecisionAdapter(this, decisions);
         rvDecisions.setAdapter(adapter);
         rvDecisions.setLayoutManager(new LinearLayoutManager(this));
-
-        decisions.add(adapter.mapDecision(this,SaveData.index));
+        Decision initialDecision;
+        if(getIntent().getBooleanExtra("chapterSelected", false)){
+            initialDecision = adapter.mapDecision(this, getIntent().getStringExtra("chapter"));
+        } else {
+            initialDecision = adapter.mapDecision(this,SaveData.index);
+        }
+        decisions.add(initialDecision);
+        if(!SaveData.chapters.contains(initialDecision.getFileName())){ SaveData.chapters.add(initialDecision.getFileName()); }
+        if(initialDecision.getCheckpoint()) {
+            if (!SaveData.usedCheckpoints.contains(initialDecision.getFileName())) {
+                SaveData.usedCheckpoints.add(initialDecision.getFileName());
+                if (!SaveData.checkpoints.contains(initialDecision.getFileName())) {
+                    SaveData.checkpoints.add(initialDecision.getFileName());
+                }
+            }
+        }
 /*
         SaveData.items.add(new Item("potion"));
         SaveData.items.add(new Item("key"));
@@ -125,6 +162,27 @@ public class GameActivity extends AppCompatActivity {
         edit.putInt("def", SaveData.def);
         edit.putInt("statp", SaveData.statp);
         edit.putString("index", SaveData.index);
+
+        StringBuilder che = new StringBuilder();
+        for(String i : SaveData.checkpoints){
+            che.append(i + ",");
+        }
+
+        edit.putString("checkpoints", che.toString());
+
+        StringBuilder usche = new StringBuilder();
+        for(String i : SaveData.usedCheckpoints){
+            usche.append(i + ",");
+        }
+
+        edit.putString("usedCheckpoints", usche.toString());
+
+        StringBuilder ch = new StringBuilder();
+        for(String i : SaveData.chapters){
+            ch.append(i + ",");
+        }
+
+        edit.putString("chapters", ch.toString());
 
         StringBuilder sb = new StringBuilder();
         for(Item i : SaveData.items) {

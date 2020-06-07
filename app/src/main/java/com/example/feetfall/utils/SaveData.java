@@ -1,6 +1,7 @@
 package com.example.feetfall.utils;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class SaveData {
     // Stats
@@ -13,6 +14,9 @@ public class SaveData {
     public static int def = 8;
     public static int statp = 0;
     public static String index = "1";
+    public static ArrayList<String> checkpoints = new ArrayList<>();
+    public static ArrayList<String> usedCheckpoints = new ArrayList<>();
+    public static ArrayList<String> chapters = new ArrayList<>();
     public static ArrayList<Item> items = new ArrayList<>();
     public static Weapon helmet = null;
     public static Weapon weapon = null;
