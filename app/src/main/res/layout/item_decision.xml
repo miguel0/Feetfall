@@ -17,27 +17,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btDec1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llDecision"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:enabled="false"
-        android:text="Button"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDecFirst" />
-
-    <Button
-        android:id="@+id/btDec2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:enabled="false"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btDec1" />
+        app:layout_constraintTop_toBottomOf="@id/tvDecFirst"/>
 
     <TextView
         android:id="@+id/tvDecSec"
@@ -50,5 +38,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btDec2" />
+        app:layout_constraintTop_toBottomOf="@+id/llDecision" />
 </androidx.constraintlayout.widget.ConstraintLayout>

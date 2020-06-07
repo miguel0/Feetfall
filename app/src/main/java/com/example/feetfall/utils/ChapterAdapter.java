@@ -18,6 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -93,33 +95,26 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
             Boolean checkpoint = raw.getBoolean("checkpoint");
             JSONArray decisions = raw.getJSONArray("decisions");
 
-            JSONObject db1json = decisions.getJSONObject(0);
-            DecisionButton db1 = new DecisionButton(
-                    db1json.getString("text"),
-                    db1json.getString("result"),
-                    db1json.getInt("exp"),
-                    db1json.getInt("hp"),
-                    db1json.getInt("str"),
-                    db1json.getInt("def"),
-                    db1json.getString("requires"),
-                    db1json.getString("success"),
-                    db1json.getString("failure")
-            );
+            ArrayList<DecisionButton> decButtons = new ArrayList<>();
 
-            JSONObject db2json = decisions.getJSONObject(1);
-            DecisionButton db2 = new DecisionButton(
-                    db2json.getString("text"),
-                    db2json.getString("result"),
-                    db2json.getInt("exp"),
-                    db2json.getInt("hp"),
-                    db2json.getInt("str"),
-                    db2json.getInt("def"),
-                    db2json.getString("requires"),
-                    db2json.getString("success"),
-                    db2json.getString("failure")
-            );
+            for(int i = 0; i < decisions.length(); i++) {
+                JSONObject dbjson = decisions.getJSONObject(i);
+                DecisionButton db = new DecisionButton(
+                        dbjson.getString("text"),
+                        dbjson.getString("result"),
+                        dbjson.getInt("exp"),
+                        dbjson.getInt("hp"),
+                        dbjson.getInt("str"),
+                        dbjson.getInt("def"),
+                        dbjson.getString("requires"),
+                        dbjson.getString("success"),
+                        dbjson.getString("failure")
+                );
 
-            Decision decision = new Decision(title, file, initialText, item, equipment, checkpoint, db1, db2);
+                decButtons.add(db);
+            }
+
+            Decision decision = new Decision(title, file, initialText, item, equipment, checkpoint, decButtons);
             return decision;
         } catch (JSONException e) {
             e.printStackTrace();

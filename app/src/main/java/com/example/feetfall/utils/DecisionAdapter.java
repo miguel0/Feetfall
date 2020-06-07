@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
 
     private Context context;
     private List<Decision> mDecisions;
+    private ArrayList<Button> buttons;
 
     public DecisionAdapter(Context context, List<Decision> decisions) {
         this.context = context;
@@ -54,129 +56,86 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
         Decision decision = mDecisions.get(position);
 
         holder.tvDecFirst.setText(decision.getInitialText());
-        holder.btDec1.setText(decision.getDec1().text);
-        holder.btDec2.setText(decision.getDec2().text);
 
-        if(!decision.decided) {
-            if(decision.getDec1().text.length() < 1) {
-                holder.tvDecSec.setText("");
-                return;
+        buttons = new ArrayList<>();
+        if(holder.llDecision.getChildCount() > 0)
+            holder.llDecision.removeAllViews();
+        holder.tvDecSec.setText("");
+
+        for(DecisionButton i : decision.getDecisions()) {
+            DecisionButton temp = i;
+
+            Button button = new Button(context);
+
+            button.setEnabled(false);
+            button.setText(temp.text);
+            button.setTextSize(24);
+            button.setBackgroundResource(R.drawable.decision_shape);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            holder.llDecision.addView(button, params);
+            buttons.add(button);
+
+            if (!decision.decided) {
+                button.setEnabled(true);
+
+                button.setOnClickListener(v -> {
+                    decision.decided = true;
+                    decision.decision = decision.getDecisions().indexOf(temp);
+
+                    holder.tvDecSec.setText(temp.result);
+                    for(Button j : buttons) {
+                        j.setEnabled(false);
+                    }
+
+                    SaveData.addExp(temp.exp);
+                    SaveData.damage(temp.hp);
+                    boolean fulfills = false;
+                    Item usedItem = searchItem(temp.requires);
+                    if (temp.requires.length() == 0 || usedItem != null) {
+                        fulfills = true;
+                    }
+                    Decision nextDecision;
+
+                    if (fulfills && (SaveData.getStr() >= temp.str) && (SaveData.getDef() >= temp.def)) {
+                        SaveData.items.remove(usedItem);
+                        nextDecision = mapDecision(context, temp.success);
+                        GameActivity.decisions.add(nextDecision);
+                        SaveData.index = temp.success;
+                        if (nextDecision.getItem().length() > 0) {
+                            SaveData.items.add(new Item(nextDecision.getItem()));
+                        }
+                        if (nextDecision.getEquipment().length() > 0) {
+                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
+                        }
+                        GameActivity.adapter.notifyDataSetChanged();
+                    } else {
+                        nextDecision = mapDecision(context, temp.failure);
+                        GameActivity.decisions.add(nextDecision);
+                        SaveData.index = temp.failure;
+                        if (nextDecision.getItem().length() > 0) {
+                            SaveData.items.add(new Item(nextDecision.getItem()));
+                        }
+                        if (nextDecision.getEquipment().length() > 0) {
+                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
+                        }
+                        GameActivity.adapter.notifyDataSetChanged();
+                    }
+                    if(!SaveData.chapters.contains(nextDecision.getFileName())){ SaveData.chapters.add(nextDecision.getFileName()); }
+                    if(nextDecision.getCheckpoint()) {
+                        if (!SaveData.usedCheckpoints.contains(nextDecision.getFileName())) {
+                            SaveData.usedCheckpoints.add(nextDecision.getFileName());
+                            if (!SaveData.checkpoints.contains(nextDecision.getFileName())) {
+                                SaveData.checkpoints.add(nextDecision.getFileName());
+                            }
+                        }
+                    }
+                });
+            } else {
+                holder.tvDecSec.setText(decision.getDecisions().get(decision.decision).result);
             }
-
-            holder.btDec1.setEnabled(true);
-            holder.btDec2.setEnabled(true);
-
-            holder.btDec1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    decision.decided = true;
-                    decision.decision = 1;
-
-                    holder.tvDecSec.setText(decision.getDec1().result);
-                    holder.btDec1.setEnabled(false);
-                    holder.btDec2.setEnabled(false);
-
-                    SaveData.addExp(decision.getDec1().exp);
-                    SaveData.damage(decision.getDec1().hp);
-                    boolean fulfills = false;
-                    Item usedItem = searchItem(decision.getDec1().requires);
-                    if (decision.getDec1().requires.length() == 0 || usedItem != null) {
-                        fulfills = true;
-                    }
-                    Decision nextDecision;
-                    if (fulfills && (SaveData.getStr() >= decision.getDec1().str) && (SaveData.getDef() >= decision.getDec1().def)) {
-                        SaveData.items.remove(usedItem);
-                        nextDecision = mapDecision(context, decision.getDec1().success);
-                        GameActivity.decisions.add(nextDecision);
-                        SaveData.index = decision.getDec1().success;
-                        if (nextDecision.getItem().length() > 0) {
-                            SaveData.items.add(new Item(nextDecision.getItem()));
-                        }
-                        if (nextDecision.getEquipment().length() > 0) {
-                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
-                        }
-                        GameActivity.adapter.notifyDataSetChanged();
-                    } else {
-                        nextDecision = mapDecision(context, decision.getDec1().failure);
-                        GameActivity.decisions.add(nextDecision);
-                        SaveData.index = decision.getDec1().failure;
-                        if (nextDecision.getItem().length() > 0) {
-                            SaveData.items.add(new Item(nextDecision.getItem()));
-                        }
-                        if (nextDecision.getEquipment().length() > 0) {
-                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
-                        }
-                        GameActivity.adapter.notifyDataSetChanged();
-                    }
-                    if(!SaveData.chapters.contains(nextDecision.getFileName())){ SaveData.chapters.add(nextDecision.getFileName()); }
-                    if(nextDecision.getCheckpoint()) {
-                        if (!SaveData.usedCheckpoints.contains(nextDecision.getFileName())) {
-                            SaveData.usedCheckpoints.add(nextDecision.getFileName());
-                            if (!SaveData.checkpoints.contains(nextDecision.getFileName())) {
-                                SaveData.checkpoints.add(nextDecision.getFileName());
-                            }
-                        }
-                    }
-                }
-            });
-
-            holder.btDec2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    decision.decided = true;
-                    decision.decision = 2;
-
-                    holder.tvDecSec.setText(decision.getDec2().result);
-                    holder.btDec1.setEnabled(false);
-                    holder.btDec2.setEnabled(false);
-
-                    SaveData.addExp(decision.getDec2().exp);
-                    SaveData.damage(decision.getDec2().hp);
-                    boolean fulfills = false;
-                    Item usedItem = searchItem(decision.getDec2().requires);
-                    if (decision.getDec2().requires.length() == 0 || usedItem != null) {
-                        fulfills = true;
-                    }
-                    Decision nextDecision;
-                    if (fulfills && (SaveData.getStr() >= decision.getDec2().str) && (SaveData.getDef() >= decision.getDec2().def)) {
-                        SaveData.items.remove(usedItem);
-                        nextDecision = mapDecision(context, decision.getDec2().success);
-                        GameActivity.decisions.add(nextDecision);
-                        SaveData.index = decision.getDec2().success;
-                        if (nextDecision.getItem().length() > 0) {
-                            SaveData.items.add(new Item(nextDecision.getItem()));
-                        }
-                        if (nextDecision.getEquipment().length() > 0) {
-                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
-                        }
-                        GameActivity.adapter.notifyDataSetChanged();
-                    } else {
-                        nextDecision = mapDecision(context, decision.getDec2().failure);
-                        GameActivity.decisions.add(nextDecision);
-                        SaveData.index = decision.getDec2().failure;
-                        if (nextDecision.getItem().length() > 0) {
-                            SaveData.items.add(new Item(nextDecision.getItem()));
-                        }
-                        if (nextDecision.getEquipment().length() > 0) {
-                            SaveData.items.add(new Weapon(nextDecision.getEquipment()));
-                        }
-                        GameActivity.adapter.notifyDataSetChanged();
-                    }
-                    if(!SaveData.chapters.contains(nextDecision.getFileName())){ SaveData.chapters.add(nextDecision.getFileName()); }
-                    if(nextDecision.getCheckpoint()) {
-                        if (!SaveData.usedCheckpoints.contains(nextDecision.getFileName())) {
-                            SaveData.usedCheckpoints.add(nextDecision.getFileName());
-                            if (!SaveData.checkpoints.contains(nextDecision.getFileName())) {
-                                SaveData.checkpoints.add(nextDecision.getFileName());
-                            }
-                        }
-                    }
-                }
-            });
-        } else if(decision.decision == 1) {
-            holder.tvDecSec.setText(decision.getDec1().result);
-        } else {
-            holder.tvDecSec.setText(decision.getDec2().result);
         }
     }
 
@@ -189,8 +148,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
 
         @BindView(R.id.tvDecFirst) TextView tvDecFirst;
         @BindView(R.id.tvDecSec) TextView tvDecSec;
-        @BindView(R.id.btDec1) Button btDec1;
-        @BindView(R.id.btDec2) Button btDec2;
+        @BindView(R.id.llDecision) LinearLayout llDecision;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -217,33 +175,26 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
             Boolean checkpoint = raw.getBoolean("checkpoint");
             JSONArray decisions = raw.getJSONArray("decisions");
 
-            JSONObject db1json = decisions.getJSONObject(0);
-            DecisionButton db1 = new DecisionButton(
-                    db1json.getString("text"),
-                    db1json.getString("result"),
-                    db1json.getInt("exp"),
-                    db1json.getInt("hp"),
-                    db1json.getInt("str"),
-                    db1json.getInt("def"),
-                    db1json.getString("requires"),
-                    db1json.getString("success"),
-                    db1json.getString("failure")
-            );
+            ArrayList<DecisionButton> decButtons = new ArrayList<>();
 
-            JSONObject db2json = decisions.getJSONObject(1);
-            DecisionButton db2 = new DecisionButton(
-                    db2json.getString("text"),
-                    db2json.getString("result"),
-                    db2json.getInt("exp"),
-                    db2json.getInt("hp"),
-                    db2json.getInt("str"),
-                    db2json.getInt("def"),
-                    db2json.getString("requires"),
-                    db2json.getString("success"),
-                    db2json.getString("failure")
-            );
+            for(int i = 0; i < decisions.length(); i++) {
+                JSONObject dbjson = decisions.getJSONObject(i);
+                DecisionButton db = new DecisionButton(
+                        dbjson.getString("text"),
+                        dbjson.getString("result"),
+                        dbjson.getInt("exp"),
+                        dbjson.getInt("hp"),
+                        dbjson.getInt("str"),
+                        dbjson.getInt("def"),
+                        dbjson.getString("requires"),
+                        dbjson.getString("success"),
+                        dbjson.getString("failure")
+                );
 
-            Decision decision = new Decision(title, file, initialText, item, equipment, checkpoint, db1, db2);
+                decButtons.add(db);
+            }
+
+            Decision decision = new Decision(title, file, initialText, item, equipment, checkpoint, decButtons);
             return decision;
         } catch (JSONException e) {
             e.printStackTrace();
