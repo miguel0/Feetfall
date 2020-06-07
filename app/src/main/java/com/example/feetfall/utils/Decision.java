@@ -1,20 +1,21 @@
 package com.example.feetfall.utils;
 
+import java.util.ArrayList;
+
 public class Decision {
 
     private String initialText, item, equipment;
-    private DecisionButton dec1, dec2;
+    private ArrayList<DecisionButton> decisions;
     public boolean decided;
     public int decision;
 
-    public Decision(String initialText, String item, String equipment, DecisionButton dec1, DecisionButton dec2) {
+    public Decision(String initialText, String item, String equipment, ArrayList<DecisionButton> decisions) {
         this.initialText = initialText;
         this.item = item;
         this.equipment = equipment;
-        this.dec1 = dec1;
-        this.dec2 = dec2;
+        this.decisions = decisions;
         decided = false;
-        decision = 0;
+        decision = -1;
     }
 
     public String getInitialText() {
@@ -25,25 +26,17 @@ public class Decision {
         this.initialText = initialText;
     }
 
-    public DecisionButton getDec1() {
-        return dec1;
-    }
-
-    public void setDec1(DecisionButton dec1) {
-        this.dec1 = dec1;
-    }
-
-    public DecisionButton getDec2() {
-        return dec2;
-    }
-
-    public void setDec2(DecisionButton dec2) {
-        this.dec2 = dec2;
-    }
-
     public String getItem() { return item; }
 
     public void setItem(String item) { this.item = item; }
+
+    public ArrayList<DecisionButton> getDecisions() {
+        return decisions;
+    }
+
+    public void setDecisions(ArrayList<DecisionButton> decisions) {
+        this.decisions = decisions;
+    }
 
     public String getEquipment() { return equipment; }
 
