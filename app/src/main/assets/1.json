@@ -1,4 +1,6 @@
 {
+  "checkpoint" : true,
+  "title" : "Holo",
   initialText: "You suddenly appear, in the darkness, feeling like waking up. But a comfortable bed, a painful headache and sore throat makes you want to sleep some more. You:",
   item:"",
   "equipment": "",

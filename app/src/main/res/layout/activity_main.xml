@@ -23,7 +23,7 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="11dp"
         android:fontFamily="@font/julius_sans_one"
         android:text="Start"
         android:textSize="32sp"
@@ -36,24 +36,37 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/julius_sans_one"
         android:text="Continue"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/btExtras"
+        app:layout_constraintBottom_toTopOf="@+id/btChapters"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btChapters"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="13dp"
+        android:fontFamily="@font/julius_sans_one"
+        android:text="Chapters"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/btExtras"
+        app:layout_constraintStart_toStartOf="@+id/btContinue" />
 
     <Button
         android:id="@+id/btExtras"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="89dp"
         android:fontFamily="@font/julius_sans_one"
         android:text="Extras"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/btChapters" />
 </androidx.constraintlayout.widget.ConstraintLayout>

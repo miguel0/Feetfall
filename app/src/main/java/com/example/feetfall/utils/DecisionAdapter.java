@@ -83,9 +83,10 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     if (decision.getDec1().requires.length() == 0 || usedItem != null) {
                         fulfills = true;
                     }
+                    Decision nextDecision;
                     if (fulfills && (SaveData.getStr() >= decision.getDec1().str) && (SaveData.getDef() >= decision.getDec1().def)) {
                         SaveData.items.remove(usedItem);
-                        Decision nextDecision = mapDecision(context, decision.getDec1().success);
+                        nextDecision = mapDecision(context, decision.getDec1().success);
                         GameActivity.decisions.add(nextDecision);
                         SaveData.index = decision.getDec1().success;
                         if (nextDecision.getItem().length() > 0) {
@@ -96,7 +97,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                         }
                         GameActivity.adapter.notifyDataSetChanged();
                     } else {
-                        Decision nextDecision = mapDecision(context, decision.getDec1().failure);
+                        nextDecision = mapDecision(context, decision.getDec1().failure);
                         GameActivity.decisions.add(nextDecision);
                         SaveData.index = decision.getDec1().failure;
                         if (nextDecision.getItem().length() > 0) {
@@ -106,6 +107,15 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                             SaveData.items.add(new Weapon(nextDecision.getEquipment()));
                         }
                         GameActivity.adapter.notifyDataSetChanged();
+                    }
+                    if(!SaveData.chapters.contains(nextDecision.getFileName())){ SaveData.chapters.add(nextDecision.getFileName()); }
+                    if(nextDecision.getCheckpoint()) {
+                        if (!SaveData.usedCheckpoints.contains(nextDecision.getFileName())) {
+                            SaveData.usedCheckpoints.add(nextDecision.getFileName());
+                            if (!SaveData.checkpoints.contains(nextDecision.getFileName())) {
+                                SaveData.checkpoints.add(nextDecision.getFileName());
+                            }
+                        }
                     }
                 }
             });
@@ -127,9 +137,10 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     if (decision.getDec2().requires.length() == 0 || usedItem != null) {
                         fulfills = true;
                     }
+                    Decision nextDecision;
                     if (fulfills && (SaveData.getStr() >= decision.getDec2().str) && (SaveData.getDef() >= decision.getDec2().def)) {
                         SaveData.items.remove(usedItem);
-                        Decision nextDecision = mapDecision(context, decision.getDec2().success);
+                        nextDecision = mapDecision(context, decision.getDec2().success);
                         GameActivity.decisions.add(nextDecision);
                         SaveData.index = decision.getDec2().success;
                         if (nextDecision.getItem().length() > 0) {
@@ -140,7 +151,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                         }
                         GameActivity.adapter.notifyDataSetChanged();
                     } else {
-                        Decision nextDecision = mapDecision(context, decision.getDec2().failure);
+                        nextDecision = mapDecision(context, decision.getDec2().failure);
                         GameActivity.decisions.add(nextDecision);
                         SaveData.index = decision.getDec2().failure;
                         if (nextDecision.getItem().length() > 0) {
@@ -150,6 +161,15 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                             SaveData.items.add(new Weapon(nextDecision.getEquipment()));
                         }
                         GameActivity.adapter.notifyDataSetChanged();
+                    }
+                    if(!SaveData.chapters.contains(nextDecision.getFileName())){ SaveData.chapters.add(nextDecision.getFileName()); }
+                    if(nextDecision.getCheckpoint()) {
+                        if (!SaveData.usedCheckpoints.contains(nextDecision.getFileName())) {
+                            SaveData.usedCheckpoints.add(nextDecision.getFileName());
+                            if (!SaveData.checkpoints.contains(nextDecision.getFileName())) {
+                                SaveData.checkpoints.add(nextDecision.getFileName());
+                            }
+                        }
                     }
                 }
             });
@@ -190,9 +210,11 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
     public Decision mapDecision(Context context, String file) {
         try{
             JSONObject raw = new JSONObject(loadJSONFromAsset(context, file));
+            String title = raw.getString("title");
             String initialText = raw.getString("initialText");
             String item = raw.getString("item");
             String equipment = raw.getString("equipment");
+            Boolean checkpoint = raw.getBoolean("checkpoint");
             JSONArray decisions = raw.getJSONArray("decisions");
 
             JSONObject db1json = decisions.getJSONObject(0);
@@ -221,7 +243,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     db2json.getString("failure")
             );
 
-            Decision decision = new Decision(initialText, item, equipment, db1, db2);
+            Decision decision = new Decision(title, file, initialText, item, equipment, checkpoint, db1, db2);
             return decision;
         } catch (JSONException e) {
             e.printStackTrace();

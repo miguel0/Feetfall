@@ -22,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    @OnClick(R.id.btChapters)
+    public void btChapters(View v) {
+        Intent i = new Intent(MainActivity.this, ChaptersActivity.class);
+        startActivity(i);
+    }
+
     @OnClick(R.id.btExtras)
     public void btExtras(View v) {
         Intent i = new Intent(MainActivity.this, ApiActivity.class);

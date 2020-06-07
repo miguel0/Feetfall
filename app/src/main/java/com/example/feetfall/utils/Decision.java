@@ -2,15 +2,19 @@ package com.example.feetfall.utils;
 
 public class Decision {
 
-    private String initialText, item, equipment;
+    private String title, fileName, initialText, item, equipment;
+    private Boolean checkpoint;
     private DecisionButton dec1, dec2;
     public boolean decided;
     public int decision;
 
-    public Decision(String initialText, String item, String equipment, DecisionButton dec1, DecisionButton dec2) {
+    public Decision(String title, String fileName, String initialText, String item, String equipment, Boolean checkpoint, DecisionButton dec1, DecisionButton dec2) {
+        this.title = title;
+        this.fileName = fileName;
         this.initialText = initialText;
         this.item = item;
         this.equipment = equipment;
+        this.checkpoint = checkpoint;
         this.dec1 = dec1;
         this.dec2 = dec2;
         decided = false;
@@ -48,4 +52,16 @@ public class Decision {
     public String getEquipment() { return equipment; }
 
     public void setEquipment(String equipment) { this.equipment = equipment; }
+
+    public String getTitle() { return title; }
+
+    public void setTitle(String title) { this.title = title; }
+
+    public Boolean getCheckpoint() { return checkpoint; }
+
+    public void setCheckpoint(Boolean checkpoint) { this.checkpoint = checkpoint; }
+
+    public String getFileName() { return fileName; }
+
+    public void setFileName(String fileName) { this.fileName = fileName; }
 }
