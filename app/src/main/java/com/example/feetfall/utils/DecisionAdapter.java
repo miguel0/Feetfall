@@ -69,7 +69,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
 
             button.setEnabled(false);
             button.setText(temp.text);
-            button.setTextSize(24);
+            button.setTextSize(20);
             button.setBackgroundResource(R.drawable.decision_shape);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,

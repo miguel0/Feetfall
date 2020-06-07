@@ -21,11 +21,15 @@
         android:id="@+id/llDecision"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:orientation="vertical"
+        android:divider="@drawable/divider"
+        android:showDividers="middle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDecFirst"/>
+        app:layout_constraintTop_toBottomOf="@id/tvDecFirst" />
 
     <TextView
         android:id="@+id/tvDecSec"
