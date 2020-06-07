@@ -4,10 +4,10 @@
   "equipment": "",
   "decisions": [
     {
-      "text": "Say \"Oh shit\" and start running", "result": "You dumbass, you just woke up. You can't run that easy.", "exp": 0, "hp": 0, "str": 0, "def": 10, "requires": "", "success": "won", "failure": "1_12"
+      "text": "Say \"Oh shit\" and start running", "result": "You dumbass, you just woke up. You can't run that easy.", "exp": 0, "hp": 0, "str": 0, "def": 10, "requires": "", "success": "end", "failure": "1_12"
     },
     {
-      "text": "Say \"Oh shit\" and try to punch one of them", "result": "C'mon, they're HUGE! Look at them! They'll knock you out.", "exp": 0, "hp": 0, "str": 0, "def": 10, "requires": "", "success": "won", "failure": "1_12"
+      "text": "Say \"Oh shit\" and try to punch one of them", "result": "C'mon, they're HUGE! Look at them! They'll knock you out.", "exp": 0, "hp": 0, "str": 0, "def": 10, "requires": "", "success": "end", "failure": "1_12"
     }
   ]
 }

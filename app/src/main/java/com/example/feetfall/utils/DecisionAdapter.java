@@ -54,6 +54,20 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
     @Override
     public void onBindViewHolder(DecisionAdapter.ViewHolder holder, int position) {
         Decision decision = mDecisions.get(position);
+        if(decision.getTitle().equals("Hello again")) {
+            /*
+            for (Decision d : this.mDecisions) {
+                if (d.getTitle().equals("Hello again")) {
+                    break;
+                }
+                this.mDecisions.remove(0);
+            }
+            */
+            Decision checkpoint = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
+            SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
+            GameActivity.decisions.add(checkpoint);
+            GameActivity.adapter.notifyDataSetChanged();
+        }
 
         holder.tvDecFirst.setText(decision.getInitialText());
 
@@ -98,7 +112,6 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                         fulfills = true;
                     }
                     Decision nextDecision;
-
                     if (fulfills && (SaveData.getStr() >= temp.str) && (SaveData.getDef() >= temp.def)) {
                         SaveData.items.remove(usedItem);
                         nextDecision = mapDecision(context, temp.success);
@@ -123,8 +136,10 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                         }
                         GameActivity.adapter.notifyDataSetChanged();
                     }
-                    if(!SaveData.chapters.contains(nextDecision.getFileName())){ SaveData.chapters.add(nextDecision.getFileName()); }
-                    if(nextDecision.getCheckpoint()) {
+                    if (!SaveData.chapters.contains(nextDecision.getFileName())) {
+                        SaveData.chapters.add(nextDecision.getFileName());
+                    }
+                    if (nextDecision.getCheckpoint()) {
                         if (!SaveData.usedCheckpoints.contains(nextDecision.getFileName())) {
                             SaveData.usedCheckpoints.add(nextDecision.getFileName());
                             if (!SaveData.checkpoints.contains(nextDecision.getFileName())) {

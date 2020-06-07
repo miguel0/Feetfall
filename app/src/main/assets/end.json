@@ -1,0 +1,15 @@
+{
+  "checkpoint" : false,
+  "title" : "End of journey",
+  "initialText": "You've reached the end of your journey, young traveler. Do you wish to see what other wonders this world could've offered you? Or do you want to keep on moving and return to your old life?",
+  "item": "",
+  "equipment": "",
+  "decisions": [
+    {
+      "text": "I want to see more", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "helloagain", "failure": ""
+    },
+    {
+      "text": "I want to move on", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "goodbye", "failure": ""
+    }
+  ]
+}
