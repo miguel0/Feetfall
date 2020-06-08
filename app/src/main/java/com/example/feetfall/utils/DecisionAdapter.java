@@ -104,10 +104,10 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                             nextDecision = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
                             SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
                         } else{
-                            if(temp.success.equals("end") && SaveData.checkpoints.size() > 0) {
-                                nextDecision = mapDecision(context, temp.success);
-                            } else {
+                            if(temp.success.equals("end") && SaveData.checkpoints.size() == 0) {
                                 nextDecision = mapDecision(context, "goodbye");
+                            } else {
+                                nextDecision = mapDecision(context, temp.success);
                             }
                         }
                         GameActivity.decisions.add(nextDecision);
@@ -124,10 +124,10 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                             nextDecision = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
                             SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
                         } else{
-                            if(temp.failure.equals("end") && SaveData.checkpoints.size() > 0) {
-                                nextDecision = mapDecision(context, temp.failure);
-                            } else {
+                            if(temp.failure.equals("end") && SaveData.checkpoints.size() == 0) {
                                 nextDecision = mapDecision(context, "goodbye");
+                            } else {
+                                nextDecision = mapDecision(context, temp.failure);
                             }
                         }
                         GameActivity.decisions.add(nextDecision);

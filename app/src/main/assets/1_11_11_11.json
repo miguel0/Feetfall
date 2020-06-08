@@ -1,15 +1,9 @@
 {
   "checkpoint" : false,
-  "title" : "1_11_11_11",
+  "title" : "Door opened",
   "initialText": "It WORKED!! The door is open!!! Oh no, you see your grandma naked. This was a dream after all, and not any dream; a nightmare.",
   "item": "",
   "equipment": "",
   "decisions": [
-    {
-      "text": "", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": ""
-    },
-    {
-      "text": "", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": ""
-    }
   ]
 }
