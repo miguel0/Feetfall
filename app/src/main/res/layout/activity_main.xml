@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/title_gradient"
     tools:context=".MainActivity">
 
     <TextView
@@ -14,6 +15,7 @@
         android:fontFamily="@font/julius_sans_one"
         android:text="Feetfall"
         android:textSize="64sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,6 +29,7 @@
         android:fontFamily="@font/julius_sans_one"
         android:text="Start"
         android:textSize="32sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btContinue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,6 +43,7 @@
         android:fontFamily="@font/julius_sans_one"
         android:text="Continue"
         android:textSize="32sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btChapters"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -52,6 +56,7 @@
         android:layout_marginStart="7dp"
         android:layout_marginBottom="13dp"
         android:fontFamily="@font/julius_sans_one"
+        android:textStyle="bold"
         android:text="Chapters"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/btExtras"
@@ -67,6 +72,7 @@
         android:fontFamily="@font/julius_sans_one"
         android:text="Extras"
         android:textSize="32sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/btChapters" />
 </androidx.constraintlayout.widget.ConstraintLayout>
