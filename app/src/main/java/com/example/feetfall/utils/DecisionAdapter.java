@@ -54,20 +54,6 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
     @Override
     public void onBindViewHolder(DecisionAdapter.ViewHolder holder, int position) {
         Decision decision = mDecisions.get(position);
-        if(decision.getTitle().equals("Hello again")) {
-            /*
-            for (Decision d : this.mDecisions) {
-                if (d.getTitle().equals("Hello again")) {
-                    break;
-                }
-                this.mDecisions.remove(0);
-            }
-            */
-            Decision checkpoint = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
-            SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
-            GameActivity.decisions.add(checkpoint);
-            GameActivity.adapter.notifyDataSetChanged();
-        }
 
         holder.tvDecFirst.setText(decision.getInitialText());
 
@@ -114,7 +100,16 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     Decision nextDecision;
                     if (fulfills && (SaveData.getStr() >= temp.str) && (SaveData.getDef() >= temp.def)) {
                         SaveData.items.remove(usedItem);
-                        nextDecision = mapDecision(context, temp.success);
+                        if(decision.getTitle().equals("End of journey")) {
+                            nextDecision = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
+                            SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
+                        } else{
+                            if(temp.success.equals("end") && SaveData.checkpoints.size() > 0) {
+                                nextDecision = mapDecision(context, temp.success);
+                            } else {
+                                nextDecision = mapDecision(context, "goodbye");
+                            }
+                        }
                         GameActivity.decisions.add(nextDecision);
                         SaveData.index = temp.success;
                         if (nextDecision.getItem().length() > 0) {
@@ -125,7 +120,16 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                         }
                         GameActivity.adapter.notifyDataSetChanged();
                     } else {
-                        nextDecision = mapDecision(context, temp.failure);
+                        if(decision.getTitle().equals("End of journey")) {
+                            nextDecision = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
+                            SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
+                        } else{
+                            if(temp.failure.equals("end") && SaveData.checkpoints.size() > 0) {
+                                nextDecision = mapDecision(context, temp.failure);
+                            } else {
+                                nextDecision = mapDecision(context, "goodbye");
+                            }
+                        }
                         GameActivity.decisions.add(nextDecision);
                         SaveData.index = temp.failure;
                         if (nextDecision.getItem().length() > 0) {

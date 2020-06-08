@@ -6,10 +6,10 @@
   "equipment": "",
   "decisions": [
     {
-      "text": "I want to see more", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "helloagain", "failure": ""
+      "text": "I want to see more", "result": "Very well, traveler. Gently close your eyes, and imagine what could've been...", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "helloagain", "failure": ""
     },
     {
-      "text": "I want to move on", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "goodbye", "failure": ""
+      "text": "I want to move on", "result": "Very well, traveler. We'll meet again, in another life perhaps. Now, gently close your eyes, and keep dreaming...", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "goodbye", "failure": ""
     }
   ]
 }
