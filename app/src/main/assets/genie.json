@@ -1,6 +1,6 @@
 {
-  "checkpoint" : false,
-  "title" : "Test",
+  "checkpoint" : true,
+  "title" : "The genie",
   "initialText": "",
   "item": "",
   "equipment": "",

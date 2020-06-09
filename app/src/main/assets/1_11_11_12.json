@@ -1,0 +1,12 @@
+{
+  "checkpoint" : false,
+  "title" : "Some doors won't open",
+  "initialText": "",
+  "item": "",
+  "equipment": "",
+  "decisions": [
+    {
+      "text": "Run", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": "end"
+    }
+  ]
+}

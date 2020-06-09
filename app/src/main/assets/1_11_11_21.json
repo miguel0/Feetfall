@@ -1,6 +1,6 @@
 {
-  "checkpoint" : false,
-  "title" : "Bar fight",
+  "checkpoint" : true,
+  "title" : "The bartender",
   "initialText": "You say without fear nor doubt \"Who of you ladies know the name of this beautiful city\" (what a foolish thing to say). They all get up looking angry and go straight at ya. You:",
   "item": "",
   "equipment": "",

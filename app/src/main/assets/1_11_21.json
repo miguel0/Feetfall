@@ -1,15 +1,18 @@
 {
-  "checkpoint" : false,
+  "checkpoint" : true,
   "title" : "In the market",
-  "initialText": "Arriving at the market, you see a door with a lock, and a poker table far away with nasty people. You:" ,
+  "initialText": "Inside, you see a door with a lock, a bartender serving dark clouded beer in the bar next door, and a stray dog that is kinda looking at you.\nYou:" ,
   "item": "",
   "equipment": "",
   "decisions": [
     {
-      "text": "Go check the door", "result": "Where can it lead?", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "key", "success": "1_11_11_11", "failure": "end"
+      "text": "Go check the door", "result": "Okay, maybe this key will be of use...", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "key", "success": "opendoor", "failure": "1_11_11_12"
     },
     {
-      "text": "Go to ask directions to those gentlemans", "result": "I'm sure they'll know where we are", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "1_11_11_21", "failure": "end"
+      "text": "Go talk to the bartender", "result": "Maybe he can explain me what is this place. Or at least confuse me even more with a drink.", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "1_11_11_21", "failure": "end"
+    },
+    {
+      "text": "Go pet the dog", "result": "Why are you looking at me like that, buddy?", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "1_11_11_31", "failure": "end"
     }
   ]
 }
