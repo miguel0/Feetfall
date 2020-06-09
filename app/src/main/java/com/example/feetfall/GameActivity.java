@@ -42,6 +42,9 @@ public class GameActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tbGame);
         setSupportActionBar(toolbar);
+        SaveData.checkpoints.clear();
+        SaveData.usedCheckpoints.clear();
+        SaveData.chapters.clear();
         SaveData.items.clear();
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -130,7 +133,9 @@ public class GameActivity extends AppCompatActivity {
             initialDecision = adapter.mapDecision(this,SaveData.index);
         }
         decisions.add(initialDecision);
-        if(!SaveData.chapters.contains(initialDecision.getFileName())){ SaveData.chapters.add(initialDecision.getFileName()); }
+        if(!SaveData.chapters.contains(initialDecision.getFileName()) && !initialDecision.getTitle().equals("Goodbye") && !initialDecision.getTitle().equals("End of journey")){
+            SaveData.chapters.add(initialDecision.getFileName());
+        }
         if(initialDecision.getCheckpoint()) {
             if (!SaveData.usedCheckpoints.contains(initialDecision.getFileName())) {
                 SaveData.usedCheckpoints.add(initialDecision.getFileName());

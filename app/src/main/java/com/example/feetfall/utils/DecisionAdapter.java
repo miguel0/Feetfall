@@ -140,7 +140,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                         }
                         GameActivity.adapter.notifyDataSetChanged();
                     }
-                    if (!SaveData.chapters.contains(nextDecision.getFileName())) {
+                    if (!SaveData.chapters.contains(nextDecision.getFileName()) && !nextDecision.getTitle().equals("Goodbye") && !nextDecision.getTitle().equals("End of journey")) {
                         SaveData.chapters.add(nextDecision.getFileName());
                     }
                     if (nextDecision.getCheckpoint()) {
