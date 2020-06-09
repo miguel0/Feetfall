@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.feetfall.GameActivity;
 import com.example.feetfall.R;
 import com.example.feetfall.utils.SaveData;
+import com.google.android.material.snackbar.Snackbar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,17 +28,17 @@ public class StatsFragment extends Fragment {
     @BindView(R.id.tvStr) TextView tvStr;
     @BindView(R.id.tvDef) TextView tvDef;
     @BindView(R.id.tvStatp) TextView tvStatp;
-    @BindView(R.id.btAddStr) Button btAddStr;
-    @BindView(R.id.btAddDef) Button btAddDef;
+    @BindView(R.id.ivAddStr) ImageView btAddStr;
+    @BindView(R.id.ivAddDef) ImageView btAddDef;
 
-    @OnClick(R.id.btAddStr)
+    @OnClick(R.id.ivAddStr)
     public void btAddStr(View v) {
         SaveData.str++;
         SaveData.statp --;
         updateData();
     }
 
-    @OnClick(R.id.btAddDef)
+    @OnClick(R.id.ivAddDef)
     public void btAddDef(View v) {
         SaveData.def++;
         SaveData.statp--;
@@ -45,6 +48,7 @@ public class StatsFragment extends Fragment {
     @OnClick(R.id.btSave)
     public void btSave(View v) {
         GameActivity.saveData();
+        Snackbar.make(getView().findViewById(R.id.crStats), "Progress Saved", Snackbar.LENGTH_SHORT).show();
     }
 
     public StatsFragment() {}
@@ -60,8 +64,11 @@ public class StatsFragment extends Fragment {
     }
 
     public void updateData() {
-        tvLevel.setText(String.format("Level %d", SaveData.lvl));
-        tvExp.setText(String.format("Exp %d / %d", SaveData.exp, SaveData.maxExp));
+        tvLevel.setText(String.format("Level\n%d", SaveData.lvl));
+
+        int n = (int) ((1.0 * SaveData.exp / SaveData.maxExp) * 10);
+        tvExp.setText(String.format("%s%s", new String(new char[n]).replace("\0", "*"), new String(new char[10 - n]).replace("\0", " ")));
+
         tvHp.setText(String.format("HP %d / %d", SaveData.hp, SaveData.maxHp));
         tvStr.setText(String.format("STR %d", SaveData.getStr()));
         tvDef.setText(String.format("DEF %d", SaveData.getDef()));
