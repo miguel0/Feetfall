@@ -1,9 +1,9 @@
-package com.example.feetfall.utils;
+package com.sleepfall.feetfall.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
 
-import com.example.feetfall.R;
+import com.sleepfall.feetfall.R;
 
 public class Item {
     private String name;

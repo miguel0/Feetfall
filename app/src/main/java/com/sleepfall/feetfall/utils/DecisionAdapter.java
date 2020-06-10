@@ -1,4 +1,4 @@
-package com.example.feetfall.utils;
+package com.sleepfall.feetfall.utils;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,22 +8,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.feetfall.GameActivity;
-import com.example.feetfall.R;
+import com.sleepfall.feetfall.GameActivity;
+import com.sleepfall.feetfall.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

@@ -1,4 +1,4 @@
-package com.example.feetfall;
+package com.sleepfall.feetfall;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import com.example.feetfall.utils.ChapterAdapter;
-import com.example.feetfall.utils.Decision;
-import com.example.feetfall.utils.SaveData;
+import com.sleepfall.feetfall.utils.ChapterAdapter;
+import com.sleepfall.feetfall.utils.Decision;
+import com.sleepfall.feetfall.utils.SaveData;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;

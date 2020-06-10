@@ -1,4 +1,4 @@
-package com.example.feetfall.utils;
+package com.sleepfall.feetfall.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.feetfall.ChaptersActivity;
-import com.example.feetfall.GameActivity;
-import com.example.feetfall.MainActivity;
-import com.example.feetfall.R;
+import com.sleepfall.feetfall.GameActivity;
+import com.sleepfall.feetfall.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

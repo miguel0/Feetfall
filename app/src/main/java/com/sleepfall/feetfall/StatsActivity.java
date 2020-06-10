@@ -1,12 +1,12 @@
-package com.example.feetfall;
+package com.sleepfall.feetfall;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
-import com.example.feetfall.fragments.EquipmentFragment;
-import com.example.feetfall.fragments.InventoryFragment;
-import com.example.feetfall.fragments.StatsFragment;
+import com.sleepfall.feetfall.fragments.EquipmentFragment;
+import com.sleepfall.feetfall.fragments.InventoryFragment;
+import com.sleepfall.feetfall.fragments.StatsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import butterknife.BindView;
 import butterknife.ButterKnife;

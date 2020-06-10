@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.feetfall">
+    package="com.sleepfall.feetfall">
 
     <application
         android:allowBackup="true"
@@ -10,12 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/splashScreenTheme">
 
-        <activity android:name=".ItemDetailsActivity" />
-        <activity android:name=".ChaptersActivity" />
-        <activity android:name=".ApiActivity" />
-        <activity android:name=".StatsActivity" />
-        <activity android:name=".GameActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.sleepfall.feetfall.ItemDetailsActivity" />
+        <activity android:name="com.sleepfall.feetfall.ChaptersActivity" />
+        <activity android:name="com.sleepfall.feetfall.ApiActivity" />
+        <activity android:name="com.sleepfall.feetfall.StatsActivity" />
+        <activity android:name="com.sleepfall.feetfall.GameActivity" />
+        <activity android:name="com.sleepfall.feetfall.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

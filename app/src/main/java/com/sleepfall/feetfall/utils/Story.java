@@ -1,4 +1,4 @@
-package com.example.feetfall.utils;
+package com.sleepfall.feetfall.utils;
 
 import java.util.ArrayList;
 import java.util.List;

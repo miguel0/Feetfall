@@ -1,4 +1,4 @@
-package com.example.feetfall;
+package com.sleepfall.feetfall;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,17 +11,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.example.feetfall.utils.Decision;
-import com.example.feetfall.utils.DecisionAdapter;
-import com.example.feetfall.utils.Item;
-import com.example.feetfall.utils.SaveData;
-import com.example.feetfall.utils.Story;
-import com.example.feetfall.utils.Weapon;
-import com.google.android.material.snackbar.Snackbar;
+import com.sleepfall.feetfall.utils.Decision;
+import com.sleepfall.feetfall.utils.DecisionAdapter;
+import com.sleepfall.feetfall.utils.Item;
+import com.sleepfall.feetfall.utils.SaveData;
+import com.sleepfall.feetfall.utils.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

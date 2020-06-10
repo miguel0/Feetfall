@@ -1,4 +1,4 @@
-package com.example.feetfall.utils;
+package com.sleepfall.feetfall.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.feetfall.ItemDetailsActivity;
-import com.example.feetfall.R;
+import com.sleepfall.feetfall.ItemDetailsActivity;
+import com.sleepfall.feetfall.R;
 
 import java.util.List;
 

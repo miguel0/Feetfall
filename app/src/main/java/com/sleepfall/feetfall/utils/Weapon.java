@@ -1,6 +1,6 @@
-package com.example.feetfall.utils;
+package com.sleepfall.feetfall.utils;
 
-import com.example.feetfall.R;
+import com.sleepfall.feetfall.R;
 
 public class Weapon extends Item {
 

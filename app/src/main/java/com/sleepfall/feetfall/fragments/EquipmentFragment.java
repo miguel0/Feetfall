@@ -1,4 +1,4 @@
-package com.example.feetfall.fragments;
+package com.sleepfall.feetfall.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.feetfall.R;
-import com.example.feetfall.StatsActivity;
-import com.example.feetfall.utils.SaveData;
+import com.sleepfall.feetfall.R;
+import com.sleepfall.feetfall.utils.SaveData;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

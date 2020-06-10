@@ -1,16 +1,15 @@
-package com.example.feetfall.fragments;
+package com.sleepfall.feetfall.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.feetfall.GameActivity;
-import com.example.feetfall.R;
-import com.example.feetfall.utils.SaveData;
+import com.sleepfall.feetfall.GameActivity;
+import com.sleepfall.feetfall.R;
+import com.sleepfall.feetfall.utils.SaveData;
 import com.google.android.material.snackbar.Snackbar;
 
 import butterknife.BindView;

@@ -1,4 +1,4 @@
-package com.example.feetfall.utils;
+package com.sleepfall.feetfall.utils;
 
 public class DecisionButton {
     public String text, result, requires, success, failure;

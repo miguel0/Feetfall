@@ -1,4 +1,4 @@
-package com.example.feetfall;
+package com.sleepfall.feetfall;
 
 import android.content.Context;
 
