@@ -1,15 +1,12 @@
 {
-  "checkpoint" : true,
+  "checkpoint" : false,
   "title" : "The bartender",
-  "initialText": "You say without fear nor doubt \"Who of you ladies know the name of this beautiful city\" (what a foolish thing to say). They all get up looking angry and go straight at ya. You:",
+  "initialText": "Just as you arrive with the bartender (and god, you want a beer), people begin to scream just outside the market. They seem in distress.\nOut of curiosity, you:",
   "item": "",
   "equipment": "",
   "decisions": [
     {
-      "text": "Say \"Oh shit\" and start running", "result": "You dumbass, you just woke up. You can't run that easy.", "exp": 0, "hp": 0, "str": 0, "def": 10, "requires": "", "success": "end", "failure": "end"
-    },
-    {
-      "text": "Say \"Oh shit\" and try to punch one of them", "result": "C'mon, they're HUGE! Look at them! They'll knock you out.", "exp": 0, "hp": 0, "str": 0, "def": 10, "requires": "", "success": "end", "failure": "end"
+      "text": "Go check outside the market", "result": "What are those people doing?", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "shadow", "failure": "end"
     }
   ]
 }

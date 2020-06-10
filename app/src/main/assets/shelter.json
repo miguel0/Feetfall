@@ -1,0 +1,18 @@
+{
+  "checkpoint" : false,
+  "title" : "Take shelter",
+  "initialText": "As you run through the crowd, you know you need to find shelter. You need to find shelter NOW.\nAs you push the peasants, the guards, all the townsfolk, the figure in the sky looks at the crowd; it searches for something... or someone.\nAs it delivers a powerful groan, the people scream and run even faster, leaving all behind.\nAs you reach the end of the road, you see the following:",
+  "item": "",
+  "equipment": "",
+  "decisions": [
+    {
+      "text": "A barrel", "result": "I think this will do.", "exp": 0, "hp": 1, "str": 0, "def": 0, "requires": "", "success": "hiding", "failure": "end"
+    },
+    {
+      "text": "A dark, empty hallway", "result": "Please, I don't want to be mugged or murdered in here.", "exp": 0, "hp": 1, "str": 0, "def": 0, "requires": "", "success": "hiding", "failure": "end"
+    },
+    {
+      "text": "A wagon full oh hay (yay hay again)", "result": "Here we go.", "exp": 0, "hp": 11, "str": 0, "def": 0, "requires": "", "success": "hiding", "failure": "end"
+    }
+  ]
+}

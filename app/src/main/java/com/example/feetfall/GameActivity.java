@@ -130,12 +130,14 @@ public class GameActivity extends AppCompatActivity {
         Decision initialDecision;
         if(getIntent().getBooleanExtra("chapterSelected", false)){
             initialDecision = adapter.mapDecision(this, getIntent().getStringExtra("chapter"));
+            adapter.setUserData(this, initialDecision.getFileName());
         } else {
             initialDecision = adapter.mapDecision(this,SaveData.index);
         }
         decisions.add(initialDecision);
         if(!SaveData.chapters.contains(initialDecision.getFileName()) && !initialDecision.getTitle().equals("Goodbye") && !initialDecision.getTitle().equals("End of journey")){
             SaveData.chapters.add(initialDecision.getFileName());
+            adapter.backupJSON(this, initialDecision.getFileName());
         }
         if(initialDecision.getCheckpoint()) {
             if (!SaveData.usedCheckpoints.contains(initialDecision.getFileName())) {

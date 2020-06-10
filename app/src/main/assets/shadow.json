@@ -1,0 +1,48 @@
+{
+  "checkpoint" : false,
+  "title" : "Shadow in the sky",
+  "initialText": "As you got close to the entrance of the market, you began to see people from all over the town running, desperately.\nThey were screaming, tumbling down in the mud, carrying their children into \"safety\".\nAs you got out to try to process the scene, you saw it...\nThe enormous, winged, shadow in the sky...\nReady to unleash its furious attack over the townsfolk.\nWhile shaking, you thought:",
+  "item": "",
+  "equipment": "",
+  "decisions": [
+    {
+      "text": "RUN!!", "result": "I need to get out of here", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "I need to go NOW", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "OH FUCK OH FUCK OH FUCK", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "WHAT THE FUCK IS HAPPENING", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "If this is a dream, please wake me up", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "I don't want to die", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "God help us", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "Where the fuck am I?", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "Someone wake me up", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "Someone please get me out of here", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "THATS A FUCKING DRAGON??", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "BARTENDER WHAT DID YOU GAVE ME??", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    },
+    {
+      "text": "RUN!!", "result": "Am I high?", "exp": 0, "hp": 8, "str": 0, "def": 0, "requires": "", "success": "shelter", "failure": "end"
+    }
+  ]
+}

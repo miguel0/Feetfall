@@ -1,15 +1,12 @@
 {
-  "checkpoint" : true,
+  "checkpoint" : false,
   "title" : "The genie",
-  "initialText": "",
+  "initialText": "As you come close, the room illuminates, and a green Genie emerges from the lamp!! Then he says:\n\"Traveler, thou who traverses time and pierces the heavens. Go onward and take my gift. The townsfolk needs you right now. Continue your path, traveler, and don't look back. Now GO!!!\"\nThen he disappeared, the lights turned off,and the door opened wide. You...",
   "item": "",
-  "equipment": "",
+  "equipment": "god dress",
   "decisions": [
     {
-      "text": "", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": "end"
-    },
-    {
-      "text": "", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": "end"
+      "text": "You...go?", "result": "Okay that was awkward...", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "shadow", "failure": "end"
     }
   ]
 }

@@ -1,15 +1,12 @@
 {
   "checkpoint" : false,
   "title" : "Come here, doggie",
-  "initialText": "",
+  "initialText": "Standing by the dog, you pet him. \"What a goooood boy\", you say.\nBut he feels in distress. Suddenly, it starts barking at a crowd just outside of the market. Then, he escapes the scene.\nSurprised, you:",
   "item": "",
   "equipment": "",
   "decisions": [
     {
-      "text": "", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": "end"
-    },
-    {
-      "text": "", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": "end"
+      "text": "Go check outside the market", "result": "What are those people doing?", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "shadow", "failure": "end"
     }
   ]
 }

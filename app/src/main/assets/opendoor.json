@@ -6,13 +6,13 @@
   "equipment": "",
   "decisions": [
     {
-      "text": "What's inside?", "result": "As curiosity (and fear) fills your chest, you get close to the ball. Inside it, you see a faded green light, blinking slowly.\nBut the ball is dirty, so you clean it the best you can with your shirt.", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "genie", "failure": "end"
+      "text": "What's inside?", "result": "As curiosity (and fear) fills your chest, you get close to the ball. Inside it, you see a faded green light, blinking slowly.\nBut the ball is dirty, so you clean it the best you can with your shirt.", "exp": 3, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "genie", "failure": "end"
     },
     {
-      "text": "Should I ask if anybody is here?", "result": "As you gather courage, you take one step towards the ball, and while looking around you say in your most confident voice (not really):\n\"Hello?...\"", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "genie", "failure": "end"
+      "text": "Should I ask if anybody is here?", "result": "As you gather courage, you take one step towards the ball, and while looking around you say in your most confident voice (not really):\n\"Hello?...\"", "exp": 3, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "genie", "failure": "end"
     },
     {
-      "text": "I better go. This is creepy", "result": "You feel goosebumps all over your body as the cold air in the deserted room touches your skin. Without thinking it twice, you step away of the room and close the door\nAnyway, what could a crystal ball change about your fate?", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "raid", "failure": "end"
+      "text": "I better go. This is creepy", "result": "You feel goosebumps all over your body as the cold air in the deserted room touches your skin. Without thinking it twice, you step away of the room and close the door\nAnyway, what could a crystal ball change about your fate?", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "shadow", "failure": "end"
     }
   ]
 }

@@ -1,12 +1,12 @@
 {
   "checkpoint" : false,
   "title" : "Some doors won't open",
-  "initialText": "",
+  "initialText": "You tried, but it appears you have no key. Well, let's go meet the bartender.",
   "item": "",
   "equipment": "",
   "decisions": [
     {
-      "text": "Run", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "", "failure": "end"
+      "text": "Go to the bartender", "result": "Maybe he can explain me what is this place. Or at least confuse me even more with a drink.", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "", "success": "1_11_11_21", "failure": "end"
     }
   ]
 }

@@ -20,9 +20,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -33,6 +38,8 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
     private Context context;
     private List<Decision> mDecisions;
     private ArrayList<Button> buttons;
+
+    private static boolean checkpointSelected = false;
 
     public DecisionAdapter(Context context, List<Decision> decisions) {
         this.context = context;
@@ -54,7 +61,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
     @Override
     public void onBindViewHolder(DecisionAdapter.ViewHolder holder, int position) {
         Decision decision = mDecisions.get(position);
-
+        if(checkpointSelected && !decision.getTitle().equals("Goodbye") && !decision.getTitle().equals("End of journey")) {setUserData(this.context, decision.getFileName());}
         holder.tvDecFirst.setText(decision.getInitialText());
 
         buttons = new ArrayList<>();
@@ -98,17 +105,19 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                         fulfills = true;
                     }
                     Decision nextDecision;
-                    if (fulfills && (SaveData.getStr() >= temp.str) && (SaveData.getDef() >= temp.def)) {
+                    if (fulfills && (SaveData.getStr() >= temp.str) && (SaveData.getDef() >= temp.def) && (SaveData.hp > 0)) {
                         SaveData.items.remove(usedItem);
+                        checkpointSelected = false;
                         if(decision.getTitle().equals("End of journey")) {
-                            nextDecision = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
-                            SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
-                        } else{
-                            if(temp.success.equals("end") && SaveData.checkpoints.size() == 0) {
-                                nextDecision = mapDecision(context, "goodbye");
+                            if(temp.success.equals("helloagain") && SaveData.checkpoints.size() > 0) {
+                                checkpointSelected = true;
+                                nextDecision = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
+                                SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
                             } else {
-                                nextDecision = mapDecision(context, temp.success);
+                                nextDecision = mapDecision(context, "goodbye");
                             }
+                        } else{
+                            nextDecision = mapDecision(context, temp.success);
                         }
                         GameActivity.decisions.add(nextDecision);
                         SaveData.index = temp.success;
@@ -120,15 +129,17 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                         }
                         GameActivity.adapter.notifyDataSetChanged();
                     } else {
+                        checkpointSelected = false;
                         if(decision.getTitle().equals("End of journey")) {
-                            nextDecision = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
-                            SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
-                        } else{
-                            if(temp.failure.equals("end") && SaveData.checkpoints.size() == 0) {
-                                nextDecision = mapDecision(context, "goodbye");
+                            if(temp.success.equals("helloagain") && SaveData.checkpoints.size() > 0) {
+                                checkpointSelected = true;
+                                nextDecision = mapDecision(context, SaveData.checkpoints.get(SaveData.checkpoints.size() - 1));
+                                SaveData.checkpoints.remove(SaveData.checkpoints.size() - 1);
                             } else {
-                                nextDecision = mapDecision(context, temp.failure);
+                                nextDecision = mapDecision(context, "goodbye");
                             }
+                        } else{
+                            nextDecision = mapDecision(context, temp.failure);
                         }
                         GameActivity.decisions.add(nextDecision);
                         SaveData.index = temp.failure;
@@ -142,6 +153,7 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
                     }
                     if (!SaveData.chapters.contains(nextDecision.getFileName()) && !nextDecision.getTitle().equals("Goodbye") && !nextDecision.getTitle().equals("End of journey")) {
                         SaveData.chapters.add(nextDecision.getFileName());
+                        backupJSON(this.context, nextDecision.getFileName());
                     }
                     if (nextDecision.getCheckpoint()) {
                         if (!SaveData.usedCheckpoints.contains(nextDecision.getFileName())) {
@@ -235,5 +247,163 @@ public class DecisionAdapter extends RecyclerView.Adapter<DecisionAdapter.ViewHo
             return null;
         }
         return json;
+    }
+
+    public void backupJSON(Context context, String file) {
+        try {
+            OutputStreamWriter osw = new OutputStreamWriter(context.openFileOutput(file + "ch.json", Context.MODE_PRIVATE));
+            JSONObject content = new JSONObject();
+            content.put("lvl", SaveData.lvl);
+            content.put("maxExp", SaveData.maxExp);
+            content.put("exp", SaveData.exp);
+            content.put("maxHp", SaveData.maxHp);
+            content.put("hp", SaveData.hp);
+            content.put("str", SaveData.str);
+            content.put("def", SaveData.def);
+            content.put("statp", SaveData.statp);
+            content.put("index", SaveData.index);
+            /*
+            StringBuilder che = new StringBuilder();
+            for(String i : SaveData.checkpoints){
+                che.append(i + ",");
+            }
+            content.put("checkpoints", che.toString());
+
+            StringBuilder usche = new StringBuilder();
+            for(String i : SaveData.usedCheckpoints){
+                usche.append(i + ",");
+            }
+            content.put("usedCheckpoints", usche.toString());
+
+            StringBuilder ch = new StringBuilder();
+            for(String i : SaveData.chapters){
+                ch.append(i + ",");
+            }
+
+            content.put("chapters", ch.toString());
+            */
+            StringBuilder sb = new StringBuilder();
+            for(Item i : SaveData.items) {
+                if(i instanceof Weapon) {
+                    sb.append("w" + i.getName());
+                } else {
+                    sb.append("i" + i.getName());
+                }
+
+                sb.append(",");
+            }
+            content.put("items", sb.toString());
+
+            if(SaveData.helmet != null) {
+                content.put("helmet", SaveData.helmet.getName());
+            } else {
+                content.put("helmet", "");
+            }
+
+            if(SaveData.weapon != null) {
+                content.put("weapon", SaveData.weapon.getName());
+            } else {
+                content.put("weapon", "");
+            }
+
+            if(SaveData.armor != null) {
+                content.put("armor", SaveData.armor.getName());
+            } else {
+                content.put("armor", "");
+            }
+
+            osw.write(content.toString());
+            osw.close();
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setUserData(Context context, String file) {
+        SaveData.items.clear();
+        String rawdata = "";
+        try {
+            InputStream inputStream = context.openFileInput(file + "ch.json");
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiver = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiver = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiver);
+                }
+
+                inputStream.close();
+                rawdata = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+        try{
+            //JSONObject data = new JSONObject(loadJSONFromAsset(context, file));
+            JSONObject data = new JSONObject(rawdata);
+
+            SaveData.lvl = data.getInt("lvl");
+            SaveData.maxExp = data.getInt("maxExp");
+            SaveData.exp = data.getInt("exp");
+            SaveData.maxHp = data.getInt("maxHp");
+            SaveData.hp = data.getInt("hp");
+            SaveData.str = data.getInt("str");
+            SaveData.def = data.getInt("def");
+            SaveData.statp = data.getInt("statp");
+            SaveData.index = data.getString("index");
+            /*
+            for(String i : data.getString("checkpoints").split(",")) {
+                if(i.length() > 0) {
+                    SaveData.checkpoints.add(i);
+                }
+            }
+
+            for(String i : data.getString("usedCheckpoints").split(",")) {
+                if(i.length() > 0) {
+                    SaveData.usedCheckpoints.add(i);
+                }
+            }
+
+            for(String i : data.getString("chapters").split(",")) {
+                if(i.length() > 0) {
+                    SaveData.chapters.add(i);
+                }
+            }
+            */
+            for(String i : data.getString("items").split(",")) {
+                if(i.length() > 0) {
+                    if (i.charAt(0) == 'w') {
+                        SaveData.items.add(new Weapon(i.substring(1)));
+                    } else {
+                        SaveData.items.add(new Item(i.substring(1)));
+                    }
+                }
+            }
+
+            String temp;
+            if(!(temp = data.getString("helmet")).equals("")) {
+                SaveData.helmet = new Weapon(temp);
+            } else {
+                SaveData.helmet = null;
+            }
+            if(!(temp = data.getString("weapon")).equals("")) {
+                SaveData.weapon = new Weapon(temp);
+            } else {
+                SaveData.weapon = null;
+            }
+            if(!(temp = data.getString("armor")).equals("")) {
+                SaveData.armor = new Weapon(temp);
+            } else {
+                SaveData.armor = null;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

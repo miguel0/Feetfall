@@ -1,0 +1,15 @@
+{
+  "checkpoint" : false,
+  "title" : "Take cover",
+  "initialText": "You take cover as soon as you can.\nYou hide, without anyone noticing, having a feeling of security.\nBut then, as the ground shook, and the air filled with smoke and debris, it landed in front of you.\nThe beast, with bright red skin, looked directly at you, out of hiding.\nFilled with fear, you decide to test if this was a dream or not: you gently closed your eyes, and hoped for the best.\nAnd when you opened them...",
+  "item": "",
+  "equipment": "",
+  "decisions": [
+    {
+      "text": "WHAT HAPPENED??", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "god dress", "success": "saved", "failure": "eyes"
+    },
+    {
+      "text": "WHAT HAPPENED??", "result": "", "exp": 0, "hp": 0, "str": 0, "def": 0, "requires": "god dress", "success": "saved", "failure": "eyes"
+    }
+  ]
+}
